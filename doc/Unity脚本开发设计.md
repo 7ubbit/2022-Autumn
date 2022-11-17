@@ -1,0 +1,237 @@
+<!-- title: Gamecore 2022 -->
+---
+Written for Gamecore 2022         author: 7ubbti        date: November 17, 2022    
+---
+
+      
+# 关于Unity游戏开发中的脚本设计
+## 前言
+* 当你看到这篇教程的时候，相信你已经完成了第一次考核，并且成功做出了一款拥有自己创意的Roll-A-Ball游戏，作为你们的学长，我也是这么过来的，因为没有基础，一定很多地方都是似懂非懂的，于是便想写下了这篇教程，引导大家去思考，去进步，去学习。
+* 你们已经懂得了如何将C#脚本与游戏场景中的对象产生联系与交互(_通过将脚本挂载给游戏对象并拖拽引用_),那么不知大家在开发Roll-A-Ball时是否有遇到诸如此类的问题：
+    > 1.不同脚本中的 __变量/参数/函数__ 之间无法互相 __传递/调用__     
+    > 2.Player脚本负责处理的功能太多以至于内容冗杂     
+    > 3.游戏场景中的对象(_玩家对象和拾取物对象_)无法用脚本统一的控制生成和销毁    
+    > 4.假设有多个不同种类的拾取物时，需要重复写不同拾取物的功能代码    
+    > .......        
+* __我们常说软件开发就是算法+数据结构，而大家有没有思考过为何要研究算法和数据结构？__
+* 如果说初阶程序员写脚本只是为了实现功能，那么高阶程序员在写脚本时不仅仅只关注于脚本功能的实现，更重要的是 __脚本(代码)的性能(_内存占用/运行效率_)以及代码的可维护性(_方便后期维护更新_)__ ，安全性等。
+* 也许大家会觉得 “__刚开始就在意这么复杂的东西，只要实现功能就好__” ，没错前提是你有成为游戏策划的想法，而作为程序员，论功能其实别的程序员也可以实现，那你如何脱颖而出呢？脚本的设计的重要性不言而喻。
+## 教程
+### 关于Unity中不同脚本间的交互 
+* 说到前言中的第一个问题，在Unity中不同脚本之间的交互有以下几种方法：
+#### 方法一:
+* 通过在编辑器里面拖动，来持有这个对象去调用对应的函数，此方法比较简单。
+* 在编辑器中新建2个脚本。
+``` C#
+public class Ascript : MonoBehaviour {
+    public int value; //Ascript类内部变量
+    public void DoSomething()
+    {
+        Debug.Log("Ascript doing!"); //在Unity控制台中显示"Ascript doing!"
+    }
+}
+```
+* 我们想用Main脚本去调用Ascript脚本。我们就在Main脚本中声明一个Ascript脚本的对象。
+``` C#
+public Ascript ascript;
+```
+* 这样在代码编写的时候已经可以调用A对象中的任何 __public__ 变量和函数(公开出去的成员才能被外部类调用)。
+* 现在在Main脚本中有如下内容：
+``` C#
+public class Main : MonoBehaviour {
+    public Ascript ascript;
+    private int Mvalue;
+    public void DoASomething()
+    {   
+        //ascript.DoSomething(); 此时若直接这样运行，将报错，因为此时ascript为空引用,程序并不知道是哪个脚本。
+        if(ascript != null) //加上一个判断，使程序更安全，如果为空了，就不执行此代码。
+        {
+            Mvalue = ascript.value; //调用Ascript的变量
+            ascript.DoSomething(); 
+        }
+    }
+}
+``` 
+* 现在我们要对它赋值,这个时候我们在编辑器拖一个有Ascript脚本的实体对象给Main脚本的ascript就可以了。
+     
+#### 方法二：
+* 直接使用SendMessage()方法,可在Unity API中查看此方法，此方法比较简单。
+* 我们把上面的直接调用改成
+``` C#
+public class Main : MonoBehaviour {
+    public Ascript ascript;
+    public void DoASomething()
+    {   
+        //if(ascript != null) ascript.DoSomething();
+        if(ascript != null) ascript.SendMessage("DoSomething"); //思考此方法的含义
+    }
+}
+```
+* 此时我们把Ascript脚本里面的DoSomething函数的public去掉:
+``` C#
+public class Ascript : MonoBehaviour {
+    void DoSomething() //默认为private
+    {
+        Debug.Log("Ascript doing!"); //在Unity控制台中显示"Ascript doing!"
+    }
+}
+```
+* __思考运行结果，或自己运行试试？__
+
+* 到这里，相信各位已经慢慢地对脚本之间的关系有了一定的理解了，那么现在补充一点，如何Ascript内容是这样的会发生什么？
+``` C#
+public class Ascript : MonoBehaviour {
+    void DoSomething() //默认为private
+    {
+        Debug.Log("Ascript doing!"); //在Unity控制台中显示"Ascript doing!"
+    }
+    void DoSomething(int value)
+    {
+        Debug.Log(string.Format("{0} {1}","Ascript doing",value));
+    }
+}
+```
+* 举这个例子只是想告诉大家，其实在开发实践中，很容易产生一些问题或者想法，大可一试，然后看看运行结果，你就会比别人多一点经验。
+* 这里也就不卖关子了 测试结果是谁在上面谁就会被调用(可以理解成按顺序)。    
+      
+#### 方法三：
+* 现在我们将Ascript脚本的DoSomething()函数改成:
+``` C#
+public class Ascript : MonoBehaviour {
+    public int value; //Ascript类内部变量
+    public static void DoSomething() //静态方法
+    {
+        Debug.Log("Ascript doing!"); //在Unity控制台中显示"Ascript doing!"
+    }
+}
+``` 
+* 可以发现一个新的前缀 __static__ 被放到了DoSomething()方法前
+* __static__ 表示静态
+    > 关于静态类和静态类成员 可以查看C#官方文档中的介绍[静态类和静态类成员(C# 编程指南)](https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members)      
+* 现在在Main脚本中我们就可以直接使用 __Ascript.DoSomething();__ 调用：
+``` C#
+public class Main : MonoBehaviour {
+    private int Mvalue;
+    public void DoASomething()
+    {   
+        //Mvalue = Ascript.value; 调用Ascript的变量会报错，因为此变量不是静态变量
+        Ascript.DoSomething(); //直接调用静态方法
+    }
+}
+``` 
+* 此时你就会想如果想要Ascript.value也可以被Main调用，需要怎么样呢？
+``` C#
+public static int value; //Ascript类内部静态变量
+```
+* 答案显而易见，只需要将Ascript的value变量定义为静态变量即可使上方被注释的代码正常运行
+* 同理，如果想将整个Ascript内部的所有方法或者变量全都允许被其他类调用，可以直接定义此类为静态类
+     
+#### 单例设计模式
+* __现在让我们来探讨一些更有趣的方法__
+* 我们再在上面的基础上改成如下这个样子。
+``` C#
+public class Ascript : MonoBehaviour {
+    public static Ascript aStatic;
+    public int value;
+    void Start() 
+    {
+        aStatic = this;
+    }
+    public void DoSomething()
+    {
+        Debug.Log("Ascript doing!");
+    }
+}
+```
+* 我们把Main脚本中的调用改成：__Ascript.aStatic.DoSomething();__ 
+``` C#
+public class Main : MonoBehaviour {
+    private int Mvalue;
+    public void DoASomething()
+    {   
+        Ascript.aStatic.DoSomething();
+        Mvalue = Ascript.aStatic.value;
+        //Ascript.DoSomething(); 不再使用这种方式
+    }
+}
+``` 
+* __注意：我们这个时候Main脚本已经不持有Ascript这个对象了。但是场景一定要这个对象，如果没有的话会报错。如果我们场景里面有很多这个对象，他会找到这个对象最早生成的那个，注意不是你创建的实体对象而是第一个拖上这个脚本的对象。__
+
+* 下面将此方法推广，使得即使不继承于MonoBehaviour的类也可以让其他脚本直接调用(即利用静态构造函数替代Start()方法),称此方法为单例设计模式
+``` C#
+public class Singleton 
+{
+    public static Singleton instance;
+    public static Singleton Instance
+    {
+        get {
+            if (instance==null)
+            {
+                instance = new Singleton();
+            }
+            return instance;
+        }
+    }
+}
+//在另一个类中使用 Singleton.instance. 就可以调用Singleton内部的方法或者变量
+```
+* 单例模式是软件工程学中最富盛名的设计模式之一，在开发过程中十分常见，所以我们经常会使用 __泛型__ 写一个单例模式的基类，这样我们就可以通过继承该基类轻松实现单例模式，__并且不会随着场景切换而销毁__，代码如下所示：
+``` C#
+public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+{
+    public static T Instance { get; private set; }
+
+    protected void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = (T) this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+}
+
+public class Manager : Singleton<GameManager> //继承于单例类的Manager
+{
+    public int Value { get; set; } = 0;
+}
+//在另一个类中使用 Manager.Instance. 就可以调用Manager内部的方法或者变量
+```
+#### 方法总结
+* 第一种利用脚本互相的挂载，试想想，如果你的交互总是建立在两个或多个脚本之间，我用你的脚本实例，你用他的脚本实例，他用不知道谁的脚本实例，最后越多就越乱，到最后你自己都不想维护了，该怎么行呢？所以第一种方式是非常不推荐大家使用的。
+* 第二种利用SendMessage()或者BroadcastMessage()方法，需要介绍的是SendMessage和BroadcastMessage，是通过对对象自身底下的所有组件发送调用函数的方法，与类型无关，任意处调用，好用方便，但是问题比较明显，首先可能会通过其他组件上的名称调用某函数，抑或是根本不会采用这一方法。由于消息发送至全部组件中，因而用户无法对目标组件进行选取；其次该方法在内部依赖于反射机制，频繁使用会导致性能问题。但是如果只是个别几次，性能问题不大，而且也不需要使用静态，所以此方法可以使用，但如果频繁SendMessage就需要考虑下面的方法了。
+* 第三种利用static静态成员直接调用, __但必须要清楚地是我们应该尽量避免使用静态变量__ 
+    >   在Unity中，由于总是可以用各种方法找到一个对象，所以静态变量想不用，总是可以不用。比如你在根节点创建一个名为GameMode的GameObject，那么想用静态变量的地方，都可以改成非静态的扔到GameMode里面。访问的时候先找到唯一的那个GameObject对象再访问变量，用起来和静态变量区别不大。   
+    >   再说关键的“对象生命周期”的问题，静态变量可以用类名直接访问，感觉写起来很方便，比如如果游戏客户端只有唯一一个玩家对象，类型为class Player，那么Player的血量就可以设计成直接用：Player.Hp 来访问。    
+    >   这样写很多时候没问题，但是严格来说，__必须注意__：Player.Hp在什么时候开始可用，什么时候失效？由于Player对象肯定是在某个时刻创建，某个时刻销毁的（最晚是在游戏结束时销毁）。那么在Player创建之前、结束之后，Player.Hp是不可访问的，不应该被访问。这就是带来一个隐患：作为静态变量，Player.Hp可以随时访问，大不了读出来是0，但是原则上来讲，Player对象没有创建好的时候，Hp是不存在的。   
+    >   游戏中的绝大部分物体都有这个问题，因为基本上，场景中所有对象都有着出生、死亡的时刻，包括各种管理器对象，用static静态变量，则它的语法与事实会存在出入。（因为static静态变量是绑定在类上，从逻辑上看，类比任何对象出现都早，结束都晚。哪怕一个对象都没有的时候，也已经有类了。）    
+    >   这个问题在什么时候变得明显不对呢？就是不同类型的对象之间有相互依赖的时候。比如UI界面用到了任务管理器对象，Player用到了UI对象，任务管理器又在某些时候会访问Player的数据。这时候用静态变量很难理清哪个对象在什么时候能用、什么时候不能用。虽然这些对象大部分时候都不销毁，但未来项目变化的时候，东一个西一个的静态变量，就可能变成滋生BUG的温床。    
+* 于是乎今天的主角就要登场了，使用 __单例设计模式__，单例有一个非常大的好处：它把以上讨论的，访问某种唯一对象的模式规范化了。规范化就意味着统一、好查。如果搞错了生命期，发现某个管理器找不到了，你就可以到创建、销毁的地方去查它，很容易就发现设计上的漏洞。当游戏中的某一个游戏对象永远只有一个实例的时候，那么就可以使用单例模式。    
+    >   由于单例模式在内存中只有一个实例，减少内存开支，特别是一个对象需要频繁地创建销毁时，而且创建或销毁时性能又无法优化,单例模式就非常明显了     
+    >   由于单例模式只生成一个实例，所以，减少系统的性能开销，当一个对象产生需要比较多的资源时，如读取配置，产生其他依赖对象时，则可以通过在应用启动时直接产生一个单例对象，然后永久驻留内存的方式来解决。    
+    >   单例模式可以避免对资源的多重占用，例如一个写文件操作，由于只有一个实例存在内存中，避免对同一个资源文件的同时写操作       
+    >   单例模式可以在系统设置全局的访问点，优化和共享资源访问，例如，可以设计一个单例类，负责所有数据表的映射处理。     
+* 当然单例也并不是完美的：  
+    >   单例模式一般没有接口，扩展很困难，若要扩展，除了修改代码基本上没有第二种途径可以实现。     
+    >   单例对象如果持有Context，那么很容易引发内存泄漏，此时需要注意传递给单例对象的Context最好是Application Context。    
+     
+      
+* __当然每种方法有每种方法使用的地方，不代表一成不变，所以要根据实际运用，选择合适的方法。__
+ 
+      
+     
+### 关于面向对象编程
+*重点利用实例如Roll-A-Ball中不同的拾取物不同的效果，但是可以都派生于Buff这个父类，而Buff则继承于MonoBehaviour介绍脚本开发中的继承，面向对象开发*
+### Unity项目架构设计与开发管理
+*重点介绍GameManager单例的使用以及后续复杂的Manager Of Managers，MVCS框架等*
+## 后记
+* 还有很多内容，有待大家的补充！
+## 参考资料
+1. https://www.zhihu.com/question/47537779/answer/702268198
+1. https://blog.csdn.net/u011550097/article/details/87253629
+2. http://raylei.cn/index.php/archives/16/#http://csharpindepth.com/Articles/General/Singleton.aspx
+3. https://blog.csdn.net/qq_52855744/article/details/117755154
