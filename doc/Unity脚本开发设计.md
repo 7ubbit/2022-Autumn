@@ -229,7 +229,87 @@ public class Manager : Singleton<GameManager> //继承于单例类的Manager
       
      
 ### 关于面向对象编程
-*重点利用实例如Roll-A-Ball中不同的拾取物不同的效果，但是可以都派生于Buff这个父类，而Buff则继承于MonoBehaviour介绍脚本开发中的继承，面向对象开发*
+* 面向对象的三个特性:封装、继承、多态。相信对于封装，大家已经理解并掌握了，那么继承和多态呢？
+#### 什么是继承？
+* 继承是面向对象的编程的一种基本特性。借助继承，我们能够定义 可重用、扩展或修改父类行为的子类。成员被继承的类称为基类或父类。继承基类成员的类称为派生类或子类。接下来我们用大家已经做过的roll a ball举例说明。
+* 我们想设计小球吃方块获得相应buff，如果有多种方块，例如加Hp的方块、减Hp的方块、增加速度的方块等等，我们现在打算对每一种方块挂载一个脚本,。分别命名为ChangeHpBuff,ChangeSpeedBuff...可能的实现如下：
+``` C#
+//该脚本为定义player各属性和移动函数等等的脚本
+public class Player
+{
+    public float Hp;
+    public float Speed;
+    
+    //......
+    public void move()
+    {
+        //......
+    }
+
+};
+public class ChangeHpBuff: MonoBehaviour {
+    public GameObject player;
+    public float LastingTime;//对持续时间的处理暂时省略
+    public float DeltaHp;
+
+    public BuffEffect()//addedHp为要增加的Hp
+    {
+        player.GetComponent<Player>().Hp+=DeltaHp;
+    }
+
+    void OnTriggerEnter(Collision other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            BuffEffect();
+            Destroy(gameObject);
+        }
+    }   
+    //......
+}
+
+public class ChangeSpeedBuff: MonoBehaviour {
+    public GameObject player;
+    public float LastingTime;//对持续时间的处理暂时省略
+    public float DeltaSpeed;
+    public BuffEffect()//addedHp为要增加的Hp
+    {
+        player.GetComponent<Player>().Speed+=DeltaSpeed;
+    }
+
+    void OnTriggerEnter(Collision other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            BuffEffect();
+            Destroy(gameObject);
+
+        }
+    }
+    //......
+}
+```
+* 大家可以看到我们的代码里有着十分多的重复的东西。虽然复制粘贴很方便，但是这实在是太不优雅了。接下来我们用继承去优化结构。
+``` C#
+public class Buff: MonoBehaviour {
+    public GameObject Player;
+    public float LastingTime ;
+    public abstract void BuffEffect();//标记有 abstract 关键字的基类成员要求派生类必须重写它们。
+    void 
+}
+public class SpeedBuff: Buff
+{
+    public float DeltaSpeed;
+    
+    public override void BuffEffect()
+    {
+        player.GetComponent<Player>().Hp+=DeltaSpeed;
+        
+    }
+
+}
+``` 
+* 通常情况下，继承用于表示基类和一个或多个派生类之间的“is a”关系，其中派生类是基类的特定版本；派生类是基类的具体类型。 例如，Publication 类表示任何类型的出版物，Book 和 Magazine 类表示出版物的具体类型。请注意，“is a”还表示类型与其特定实例化之间的关系。 在以下示例中，Automobile 类包含三个唯一只读属性：Make（汽车制造商）、Model（汽车型号）和 Year（汽车出厂年份）。 Automobile 类还有一个自变量被分配给属性值的构造函数，并将 Object.ToString 方法重写为生成唯一标识 Automobile 实例（而不是 Automobile 类）的字符串。基于继承的“is a”关系最适用于基类和向基类添加附加成员或需要基类没有的其他功能的派生类。
 ### Unity项目架构设计与开发管理
 *重点介绍GameManager单例的使用以及后续复杂的Manager Of Managers，MVCS框架等*
 ## 后记
