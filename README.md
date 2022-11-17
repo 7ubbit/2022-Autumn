@@ -1,7 +1,7 @@
 # 2022-Autumn
 * Gamecore 2022年秋季考核  
 ***   
-[![独角喵](https://i.postimg.cc/ncLZH4kb/QQ-20221102090610.jpg)](https://postimg.cc/bd44g2W3)     
+![独角喵](https://i.postimg.cc/ncLZH4kb/QQ-20221102090610.jpg)     
 ***   
 ## 前言
 * 游戏制作不能只看到快乐的一面“__高薪，创意，设计，灵感__”    
