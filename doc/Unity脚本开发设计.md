@@ -1,9 +1,13 @@
 <!-- title: Gamecore 2022 -->
----
-Written for Gamecore 2022         author: 7ubbti        date: November 17, 2022    
----
-
-      
+``` C#
+///<summary>
+/// Gamecore 2022
+/// By 7ubbti and KevinChang
+/// November 17, 2022
+///<summary>
+```    
+       
+        
 # 关于Unity游戏开发中的脚本设计
 ## 前言
 * 当你看到这篇教程的时候，相信你已经完成了第一次考核，并且成功做出了一款拥有自己创意的Roll-A-Ball游戏，作为你们的学长，我也是这么过来的，因为没有基础，一定很多地方都是似懂非懂的，于是便想写下了这篇教程，引导大家去思考，去进步，去学习。
