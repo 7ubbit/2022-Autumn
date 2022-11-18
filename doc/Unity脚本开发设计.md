@@ -374,11 +374,11 @@ public class HpBuff: Buff //继承于Buff类 而不是默认的 MonoBehaviour �
     //思考HpBuff类该怎么写，可以参考上方的SpeedBuff，自己尝试写写并是否能在游戏中运行
 }
 ``` 
-* 现在Buff的管理已经完成了，可以看到Buff的基类包含了每个Buff都需要作用的
-    > 1.作用的对象Player-Player
-    > 2.作用的Buff种类-BuffKind
-    > 3.作用的时长-Length
-    > 4.添加Buff的方法-OnAdd()
+* 现在Buff的管理已经完成了，可以看到Buff的基类包含了每个Buff都需要作用的     
+    > 1.作用的对象Player-Player       
+    > 2.作用的Buff种类-BuffKind         
+    > 3.作用的时长-Length      
+    > 4.添加Buff的方法-OnAdd()       
 * 而不需要在每个Buff类中都写，避免了重复，在每个Buff类中现在只需要定义该Buff自身的一些效果，利用构造函数传递参数，重写一下添加Buff时调用的函数OnAdd()即可。
 * 那么现在该如何给玩家添加Buff呢？请看下方代码：
 ``` C#
@@ -397,12 +397,12 @@ public class Player : MonoBehaviour
         {
             //....
             AddBuff(new SpeedBuff(this, Buff.BuffKind.SpeedBuff, 10f));
-            ///<summary>
+            ///<summary>        
             ///添加一个 SpeedBuff 作用
-            ///实体为Player(this指这里的Player) 
-            ///作用类型为Buff类里的枚举类型SpeedBuff 
-            ///Buff持续时间为10秒
-            ///<summary>
+            ///实体为Player(this指这里的Player)      
+            ///作用类型为Buff类里的枚举类型SpeedBuff       
+            ///Buff持续时间为10秒       
+            ///<summary>        
             //....
         }
     }
