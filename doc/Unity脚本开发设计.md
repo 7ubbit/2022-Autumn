@@ -408,7 +408,9 @@ public class Player : MonoBehaviour
     }
 }
 ```
-
+* 当然为了给大家一些*帮助*，可以看到Buff基类中定义了一个Buff持续时间，但是只有添加的相关功能，并没有移除的相关功能，就留给大家来做吧
+* 对传入的Buff持续时间进行处理当时间到时，执行Buff移除功能的函数，相信你可以做到的。    
+#### 总结
 * 通常情况下，继承用于表示基类和一个或多个派生类之间的“is a”关系，其中派生类是基类的特定版本；派生类是基类的具体类型。 例如，Publication 类表示任何类型的出版物，Book 和 Magazine 类表示出版物的具体类型。请注意，“is a”还表示类型与其特定实例化之间的关系。 在以下示例中，Automobile 类包含三个唯一只读属性：Make（汽车制造商）、Model（汽车型号）和 Year（汽车出厂年份）。 Automobile 类还有一个自变量被分配给属性值的构造函数，并将 Object.ToString 方法重写为生成唯一标识 Automobile 实例（而不是 Automobile 类）的字符串。基于继承的“is a”关系最适用于基类和向基类添加附加成员或需要基类没有的其他功能的派生类。
 ### Unity项目架构设计与开发管理
 *重点介绍GameManager单例的使用以及后续复杂的Manager Of Managers，MVCS框架等*
