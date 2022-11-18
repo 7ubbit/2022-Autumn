@@ -13,10 +13,10 @@
 * 当你看到这篇教程的时候，相信你已经完成了第一次考核，并且成功做出了一款拥有自己创意的Roll-A-Ball游戏，作为你们的学长，我也是这么过来的，因为没有基础，一定很多地方都是似懂非懂的，于是便想写下了这篇教程，引导大家去思考，去进步，去学习。
 * 你们已经懂得了如何将C#脚本与游戏场景中的对象产生联系与交互(_通过将脚本挂载给游戏对象并拖拽引用_),那么不知大家在开发Roll-A-Ball时是否有遇到诸如此类的问题：
     > 1.不同脚本中的 __变量/参数/函数__ 之间无法互相 __传递/调用__     
-    > 2.Player脚本负责处理的功能太多以至于内容冗杂     
-    > 3.游戏场景中的对象(_玩家对象和拾取物对象_)无法用脚本统一的控制生成和销毁    
-    > 4.假设有多个不同种类的拾取物时，需要重复写不同拾取物的功能代码    
-    > .......        
+    > 2.假设有多个不同种类的拾取物时，需要重复写不同拾取物的功能代码     
+    > 3.游戏场景中的对象(_玩家对象和拾取物对象_)无法用脚本统一的控制生成和销毁      
+    > 4.Player脚本负责处理的功能太多以至于内容冗杂    
+    > .......          
 * __我们常说软件开发就是算法+数据结构，而大家有没有思考过为何要研究算法和数据结构？__
 * 如果说初阶程序员写脚本只是为了实现功能，那么高阶程序员在写脚本时不仅仅只关注于脚本功能的实现，更重要的是 __脚本(代码)的性能(_内存占用/运行效率_)以及代码的可维护性(_方便后期维护更新_)__ ，安全性等。
 * 也许大家会觉得 “__刚开始就在意这么复杂的东西，只要实现功能就好__” ，没错前提是你有成为游戏策划的想法，而作为程序员，论功能其实别的程序员也可以实现，那你如何脱颖而出呢？脚本设计的重要性不言而喻。
@@ -245,7 +245,8 @@ public class Manager : Singleton<GameManager> //继承于单例类的Manager
       
      
 ### 关于面向对象编程
-* 面向对象的三个特性:封装、继承、多态。相信对于封装(给予对象public/private/protected等修饰)，相信大家已经理解并掌握了，那么继承和多态呢？
+* 下面我们来到第二个问题，在Roll-A-Ball的开发中，大家一定都有这样的感受但凡遇到想加一个新Buff就要重新复制一边代码，简单来说就是代码的重复性太高，会很麻烦。所以下面就要跟大家介绍面向对象编程的核心。     
+* 面向对象的三个特性:封装、继承、多态。对于封装(给予对象public/private/protected等修饰)，相信大家已经理解并掌握了，那么继承和多态呢？   
 #### 什么是继承？
 * 继承是面向对象的编程的一种基本特性。借助继承，我们能够定义 __可重用、扩展或修改父类行为__ 的子类。成员被继承的类称为基类或父类。继承基类成员的类称为派生类或子类。
 #### 为什么要用继承？
@@ -306,22 +307,25 @@ public class ChangeSpeedBuff: MonoBehaviour {
     //......
 }
 ```
-* 大家可以看到我们的代码里每一个Buff脚本都需要重复引用player,LastingTime等等，那么这些重复的功能(代码)，虽然复制粘贴很方便，但是这实在是太不优雅了。于是我们便可以通过继承去优化结构，节省大量时间。
+* 大家可以看到我们的代码里每一个Buff脚本都需要重复引用player,LastingTime等等，那么这些重复的功能(代码)，虽然复制粘贴很方便，但是这实在是太不优雅了，并且代码过于重复，不利于后期维护查阅。于是我们便可以通过继承去优化结构，节省大量时间。
 ``` C#
 ///<summary>
 ///Buff继承结构
 ///<summary>
 public class Buff: MonoBehaviour { //定义一个Buff的基类继承于MonoBehaviour 使其能调用Unity的生命周期函数
-    public GameObject Player; //
+    public GameObject player; //定义Player对象
     public float LastingTime ;
     public abstract void BuffEffect();//标记有 abstract 关键字的基类成员要求派生类必须重写它们。
-    void 
+    void Start()
+    {
+        player = 
+    }
 }
-public class SpeedBuff: Buff
+public class SpeedBuff: Buff //继承于Buff类 而不是默认的 MonoBehaviour 类
 {
     public float DeltaSpeed;
     
-    public override void BuffEffect()
+    public override void BuffEffect() //重写BuffEffect()方法，赋予其个性化的效果
     {
         player.GetComponent<Player>().Hp+=DeltaSpeed;
         
@@ -329,6 +333,8 @@ public class SpeedBuff: Buff
 
 }
 ``` 
+* 上方用到的 __abstract__ 即修饰为抽象类型
+    > 具体资料可查阅 [abstract C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract)
 * 通常情况下，继承用于表示基类和一个或多个派生类之间的“is a”关系，其中派生类是基类的特定版本；派生类是基类的具体类型。 例如，Publication 类表示任何类型的出版物，Book 和 Magazine 类表示出版物的具体类型。请注意，“is a”还表示类型与其特定实例化之间的关系。 在以下示例中，Automobile 类包含三个唯一只读属性：Make（汽车制造商）、Model（汽车型号）和 Year（汽车出厂年份）。 Automobile 类还有一个自变量被分配给属性值的构造函数，并将 Object.ToString 方法重写为生成唯一标识 Automobile 实例（而不是 Automobile 类）的字符串。基于继承的“is a”关系最适用于基类和向基类添加附加成员或需要基类没有的其他功能的派生类。
 ### Unity项目架构设计与开发管理
 *重点介绍GameManager单例的使用以及后续复杂的Manager Of Managers，MVCS框架等*
