@@ -197,10 +197,12 @@ public class Singleton
 ```
 * 单例模式是软件工程学中最富盛名的设计模式之一，在开发过程中十分常见，所以我们经常会使用 __泛型__ 写一个单例模式的基类，这样我们就可以通过继承该基类轻松实现单例模式，__并且不会随着场景切换而销毁__，代码如下所示：
 ``` C#
+///<summary>
+/// 单例基类
+///<summary>
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     public static T Instance { get; private set; }
-
     protected void Awake()
     {
         if (Instance == null)
@@ -214,7 +216,9 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         }
     }
 }
-
+///<summary>
+/// 游戏核心管理脚本
+///<summary>
 public class Manager : Singleton<GameManager> //继承于单例类的Manager
 {
     public int Value { get; set; } = 0;
@@ -242,42 +246,49 @@ public class Manager : Singleton<GameManager> //继承于单例类的Manager
       
 * __当然每种方法有每种方法使用的地方，不代表一成不变，所以要根据实际运用，选择合适的方法。__
  
-      
-     
+       
 ### 关于面向对象编程
 * 下面我们来到第二个问题，在Roll-A-Ball的开发中，大家一定都有这样的感受但凡遇到想加一个新Buff就要重新复制一边代码，简单来说就是代码的重复性太高，会很麻烦。所以下面就要跟大家介绍面向对象编程的核心。     
 * 面向对象的三个特性:封装、继承、多态。对于封装(给予对象public/private/protected等修饰)，相信大家已经理解并掌握了，那么继承和多态呢？   
 #### 什么是继承？
-* 继承是面向对象的编程的一种基本特性。借助继承，我们能够定义 __可重用、扩展或修改父类行为__ 的子类。成员被继承的类称为基类或父类。继承基类成员的类称为派生类或子类。
+* 继承是面向对象程序设计中最重要的概念之一。 
+* 借助继承，我们能够定义多个 __可重用、扩展或修改父类行为__ 的子类。   
+* 已有的一个类被称为基类(父类)，而新创建的并继承于该父类的一些类被称为派生类(子类)。
+* __一个父类可以有多个子类，一个子类只能有一个父类，但一个子类可以通过接口的方式实现多重继承。__
+    > 如果想了解接口，可以查阅[Interface C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/visual-basic/programming-guide/language-features/interfaces/)
 #### 为什么要用继承？
-* 接下来我们用大家已经做过的roll a ball举例说明，我们想设计小球吃方块获得相应buff，如果有多种方块，例如加Hp的方块、减Hp的方块、增加速度的方块等等，我们现在打算对每一种方块挂载一个脚本。分别命名为ChangeHpBuff,ChangeSpeedBuff...可能的实现如下：
+* 继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。
+#### 继承如何在Unity中体现？
+* 接下来用大家已经做过的roll a ball举例说明，我们想设计小球吃方块获得相应buff，如果有多种方块，例如加Hp的方块、减Hp的方块、增加速度的方块等等，我们现在打算对每一种方块挂载一个脚本。分别命名为ChangeHpBuff,ChangeSpeedBuff...可能的实现如下：
 ``` C#
-//该脚本为定义player各属性和移动函数等等的脚本
+///<summary>
+/// Player脚本
+///<summary>
 public class Player
 {
     public float Hp;
     public float Speed;
-    
-    //......
+    //.....等等玩家自身属性
     public void move()
     {
-        //......
+        //处理玩家移动的代码块
     }
 
-};
+}
+///<summary>
+/// 加血Buff脚本
+///<summary>
 public class ChangeHpBuff: MonoBehaviour {
-    public GameObject player;
-    public float LastingTime;//对持续时间的处理暂时省略
-    public float DeltaHp;
-
-    public BuffEffect()//addedHp为要增加的Hp
+    public GameObject player; //声明玩家对象
+    public float LastingTime;//声明Buff持续时间
+    public float DeltaHp;//声明Buff增加血量
+    public BuffEffect()//该Buff的效果处理函数
     {
-        player.GetComponent<Player>().Hp+=DeltaHp;
+        player.GetComponent<Player>().Hp+=DeltaHp; //获取Player对象里的Player脚本组件 对其成员Hp进行增加
     }
-
     void OnTriggerEnter(Collision other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
             BuffEffect();
             Destroy(gameObject);
@@ -285,23 +296,23 @@ public class ChangeHpBuff: MonoBehaviour {
     }   
     //......
 }
-
+///<summary>
+/// 加速Buff脚本
+///<summary>
 public class ChangeSpeedBuff: MonoBehaviour {
-    public GameObject player;
-    public float LastingTime;//对持续时间的处理暂时省略
-    public float DeltaSpeed;
-    public BuffEffect()//addedHp为要增加的Hp
+    public GameObject player;//声明玩家对象
+    public float LastingTime;//声明Buff持续时间
+    public float DeltaSpeed;//声明Buff增加速度
+    public BuffEffect()//该Buff的效果处理函数
     {
-        player.GetComponent<Player>().Speed+=DeltaSpeed;
+        player.GetComponent<Player>().Speed+=DeltaSpeed;//获取Player对象里的Player脚本组件 对其成员Speed进行增加
     }
-
     void OnTriggerEnter(Collision other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
             BuffEffect();
             Destroy(gameObject);
-
         }
     }
     //......
@@ -345,3 +356,5 @@ public class SpeedBuff: Buff //继承于Buff类 而不是默认的 MonoBehaviour
 1. https://blog.csdn.net/u011550097/article/details/87253629
 2. http://raylei.cn/index.php/archives/16/#http://csharpindepth.com/Articles/General/Singleton.aspx
 3. https://blog.csdn.net/qq_52855744/article/details/117755154
+4. https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract
+5. https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members
