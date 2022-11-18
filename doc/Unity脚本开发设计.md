@@ -3,7 +3,7 @@
 ///<summary>
 /// Gamecore 2022
 /// By 7ubbti and KevinChang
-/// November 17, 2022
+/// Originally Written in November 17, 2022
 ///<summary>
 ```    
        
@@ -19,7 +19,7 @@
     > .......        
 * __我们常说软件开发就是算法+数据结构，而大家有没有思考过为何要研究算法和数据结构？__
 * 如果说初阶程序员写脚本只是为了实现功能，那么高阶程序员在写脚本时不仅仅只关注于脚本功能的实现，更重要的是 __脚本(代码)的性能(_内存占用/运行效率_)以及代码的可维护性(_方便后期维护更新_)__ ，安全性等。
-* 也许大家会觉得 “__刚开始就在意这么复杂的东西，只要实现功能就好__” ，没错前提是你有成为游戏策划的想法，而作为程序员，论功能其实别的程序员也可以实现，那你如何脱颖而出呢？脚本的设计的重要性不言而喻。
+* 也许大家会觉得 “__刚开始就在意这么复杂的东西，只要实现功能就好__” ，没错前提是你有成为游戏策划的想法，而作为程序员，论功能其实别的程序员也可以实现，那你如何脱颖而出呢？脚本设计的重要性不言而喻。
 ## 教程
 ### 关于Unity中不同脚本间的交互 
 * 说到前言中的第一个问题，在Unity中不同脚本之间的交互有以下几种方法：
@@ -28,7 +28,7 @@
 * 在编辑器中新建2个脚本。
 ``` C#
 public class Ascript : MonoBehaviour {
-    public int value; //Ascript类内部变量
+    public int value = 1; //Ascript类内部变量
     public void DoSomething()
     {
         Debug.Log("Ascript doing!"); //在Unity控制台中显示"Ascript doing!"
@@ -50,9 +50,13 @@ public class Main : MonoBehaviour {
         //ascript.DoSomething(); 此时若直接这样运行，将报错，因为此时ascript为空引用,程序并不知道是哪个脚本。
         if(ascript != null) //加上一个判断，使程序更安全，如果为空了，就不执行此代码。
         {
-            Mvalue = ascript.value; //调用Ascript的变量
-            ascript.DoSomething(); 
+            Mvalue = ascript.value; //Mvalue = 1;
+            ascript.DoSomething(); //输出 Ascript doing!
         }
+    }
+    void Start()
+    {
+        DoASomething(); //游戏开始时调用
     }
 }
 ``` 
@@ -67,7 +71,11 @@ public class Main : MonoBehaviour {
     public void DoASomething()
     {   
         //if(ascript != null) ascript.DoSomething();
-        if(ascript != null) ascript.SendMessage("DoSomething"); //思考此方法的含义
+        if(ascript != null) ascript.SendMessage("DoSomething"); //思考此方法的含义 输出：Ascript doing!
+    }
+    void Start()
+    {
+        DoASomething(); //游戏开始时调用
     }
 }
 ```
@@ -102,7 +110,7 @@ public class Ascript : MonoBehaviour {
 * 现在我们将Ascript脚本的DoSomething()函数改成:
 ``` C#
 public class Ascript : MonoBehaviour {
-    public int value; //Ascript类内部变量
+    public int value = 1; //Ascript类内部变量
     public static void DoSomething() //静态方法
     {
         Debug.Log("Ascript doing!"); //在Unity控制台中显示"Ascript doing!"
@@ -119,7 +127,11 @@ public class Main : MonoBehaviour {
     public void DoASomething()
     {   
         //Mvalue = Ascript.value; 调用Ascript的变量会报错，因为此变量不是静态变量
-        Ascript.DoSomething(); //直接调用静态方法
+        Ascript.DoSomething(); //直接调用静态方法 输出 Ascript doing!
+    }
+    void Start()
+    {
+        DoASomething(); //游戏开始时调用
     }
 }
 ``` 
@@ -136,7 +148,7 @@ public static int value; //Ascript类内部静态变量
 ``` C#
 public class Ascript : MonoBehaviour {
     public static Ascript aStatic;
-    public int value;
+    public int value = 1;
     void Start() 
     {
         aStatic = this;
@@ -153,9 +165,13 @@ public class Main : MonoBehaviour {
     private int Mvalue;
     public void DoASomething()
     {   
-        Ascript.aStatic.DoSomething();
-        Mvalue = Ascript.aStatic.value;
+        Ascript.aStatic.DoSomething(); //输出 Ascript doing!
+        Mvalue = Ascript.aStatic.value; // Mvalue = 1;
         //Ascript.DoSomething(); 不再使用这种方式
+    }
+    void Start()
+    {
+        DoASomething(); //游戏开始时调用
     }
 }
 ``` 
@@ -177,7 +193,7 @@ public class Singleton
         }
     }
 }
-//在另一个类中使用 Singleton.instance. 就可以调用Singleton内部的方法或者变量
+//在另一个类中使用 Singleton.Instance. 就可以调用Singleton内部的方法或者变量
 ```
 * 单例模式是软件工程学中最富盛名的设计模式之一，在开发过程中十分常见，所以我们经常会使用 __泛型__ 写一个单例模式的基类，这样我们就可以通过继承该基类轻松实现单例模式，__并且不会随着场景切换而销毁__，代码如下所示：
 ``` C#
@@ -190,11 +206,11 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         if (Instance == null)
         {
             Instance = (T) this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); //该实例不会随场景切换而销毁
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //消除重复实例
         }
     }
 }
@@ -207,7 +223,7 @@ public class Manager : Singleton<GameManager> //继承于单例类的Manager
 ```
 #### 方法总结
 * 第一种利用脚本互相的挂载，试想想，如果你的交互总是建立在两个或多个脚本之间，我用你的脚本实例，你用他的脚本实例，他用不知道谁的脚本实例，最后越多就越乱，到最后你自己都不想维护了，该怎么行呢？所以第一种方式是非常不推荐大家使用的。
-* 第二种利用SendMessage()或者BroadcastMessage()方法，需要介绍的是SendMessage和BroadcastMessage，是通过对对象自身底下的所有组件发送调用函数的方法，与类型无关，任意处调用，好用方便，但是问题比较明显，首先可能会通过其他组件上的名称调用某函数，抑或是根本不会采用这一方法。由于消息发送至全部组件中，因而用户无法对目标组件进行选取；其次该方法在内部依赖于反射机制，频繁使用会导致性能问题。但是如果只是个别几次，性能问题不大，而且也不需要使用静态，所以此方法可以使用，但如果频繁SendMessage就需要考虑下面的方法了。
+* 第二种利用SendMessage()或者BroadcastMessage()方法，首先要注意的是此方法只能调用别的脚本的函数，并不能直接引用内部成员，其次需要介绍的是SendMessage和BroadcastMessage，是通过对对象自身底下的所有组件发送调用函数的方法，与类型无关，任意处调用，好用方便，但是问题比较明显，首先可能会通过其他组件上的名称调用某函数，抑或是根本不会采用这一方法。由于消息发送至全部组件中，因而用户无法对目标组件进行选取；其次该方法在内部依赖于反射机制，频繁使用会导致性能问题。但是如果只是个别几次，性能问题不大，而且也不需要使用静态，所以此方法可以使用，但如果频繁SendMessage就需要考虑下面的方法了。
 * 第三种利用static静态成员直接调用, __但必须要清楚地是我们应该尽量避免使用静态变量__ 
     >   在Unity中，由于总是可以用各种方法找到一个对象，所以静态变量想不用，总是可以不用。比如你在根节点创建一个名为GameMode的GameObject，那么想用静态变量的地方，都可以改成非静态的扔到GameMode里面。访问的时候先找到唯一的那个GameObject对象再访问变量，用起来和静态变量区别不大。   
     >   再说关键的“对象生命周期”的问题，静态变量可以用类名直接访问，感觉写起来很方便，比如如果游戏客户端只有唯一一个玩家对象，类型为class Player，那么Player的血量就可以设计成直接用：Player.Hp 来访问。    
@@ -229,10 +245,11 @@ public class Manager : Singleton<GameManager> //继承于单例类的Manager
       
      
 ### 关于面向对象编程
-* 面向对象的三个特性:封装、继承、多态。相信对于封装，大家已经理解并掌握了，那么继承和多态呢？
+* 面向对象的三个特性:封装、继承、多态。相信对于封装(给予对象public/private/protected等修饰)，相信大家已经理解并掌握了，那么继承和多态呢？
 #### 什么是继承？
-* 继承是面向对象的编程的一种基本特性。借助继承，我们能够定义 可重用、扩展或修改父类行为的子类。成员被继承的类称为基类或父类。继承基类成员的类称为派生类或子类。接下来我们用大家已经做过的roll a ball举例说明。
-* 我们想设计小球吃方块获得相应buff，如果有多种方块，例如加Hp的方块、减Hp的方块、增加速度的方块等等，我们现在打算对每一种方块挂载一个脚本,。分别命名为ChangeHpBuff,ChangeSpeedBuff...可能的实现如下：
+* 继承是面向对象的编程的一种基本特性。借助继承，我们能够定义 __可重用、扩展或修改父类行为__ 的子类。成员被继承的类称为基类或父类。继承基类成员的类称为派生类或子类。
+#### 为什么要用继承？
+* 接下来我们用大家已经做过的roll a ball举例说明，我们想设计小球吃方块获得相应buff，如果有多种方块，例如加Hp的方块、减Hp的方块、增加速度的方块等等，我们现在打算对每一种方块挂载一个脚本。分别命名为ChangeHpBuff,ChangeSpeedBuff...可能的实现如下：
 ``` C#
 //该脚本为定义player各属性和移动函数等等的脚本
 public class Player
@@ -289,10 +306,13 @@ public class ChangeSpeedBuff: MonoBehaviour {
     //......
 }
 ```
-* 大家可以看到我们的代码里有着十分多的重复的东西。虽然复制粘贴很方便，但是这实在是太不优雅了。接下来我们用继承去优化结构。
+* 大家可以看到我们的代码里每一个Buff脚本都需要重复引用player,LastingTime等等，那么这些重复的功能(代码)，虽然复制粘贴很方便，但是这实在是太不优雅了。于是我们便可以通过继承去优化结构，节省大量时间。
 ``` C#
-public class Buff: MonoBehaviour {
-    public GameObject Player;
+///<summary>
+///Buff继承结构
+///<summary>
+public class Buff: MonoBehaviour { //定义一个Buff的基类继承于MonoBehaviour 使其能调用Unity的生命周期函数
+    public GameObject Player; //
     public float LastingTime ;
     public abstract void BuffEffect();//标记有 abstract 关键字的基类成员要求派生类必须重写它们。
     void 
