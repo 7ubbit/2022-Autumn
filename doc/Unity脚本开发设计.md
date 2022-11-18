@@ -322,27 +322,61 @@ public class ChangeSpeedBuff: MonoBehaviour {
 ///<summary>
 ///Buff继承结构
 ///<summary>
-public class Buff: MonoBehaviour { //定义一个Buff的基类继承于MonoBehaviour 使其能调用Unity的生命周期函数
-    public GameObject player; //声明玩家对象
-    public float LastingTime ;//声明Buff持续时间
-    public abstract void BuffEffect();//标记有 abstract 关键字的基类成员要求派生类必须重写它们。
-    void Start()
+public abstract class Buff
+{
+    public enum BuffKind
     {
-        player = 
+        HpBuff = 1,
+        SpeedBuff = 2,
+    }
+    public float m_Length;//声明Buff持续时间
+    public BuffKind m_BuffKind;//Buff的类型
+    public Player m_Player;//作用的实体
+    public Buff(Player player, BuffKind buffKind, float length)//构造函数传参
+    {
+        m_Player = player;
+        m_Length = length;
+        m_BuffKind = buffKind;
+    }
+    public virtual void OnAdd() { }//添加Buff的虚函数
+}
+
+public class SpeedBuff : Buff //继承于Buff类 而不是默认的 MonoBehaviour 类
+{
+    public float DeltaSpeed = 10f; //增加的速度
+    public SpeedBuff(Player player, BuffKind buffKind, float length) : base(player, buffKind, length) { }
+    public override void OnAdd()
+    {
+        base.OnAdd();
+        m_Player.Speed += DeltaSpeed;
     }
 }
-public class SpeedBuff: Buff //继承于Buff类 而不是默认的 MonoBehaviour 类
+public class HpBuff: Buff //继承于Buff类 而不是默认的 MonoBehaviour 类
 {
-    public float DeltaSpeed;
     
-    public override void BuffEffect() //重写BuffEffect()方法，赋予其个性化的效果
-    {
-        player.GetComponent<Player>().Hp+=DeltaSpeed;
-        
-    }
-
 }
 ``` 
+``` C#
+public class Player : MonoBehaviour
+{
+    public float Speed; //移动速度
+    public float Hp;
+    //....刚体等省略
+    public void AddBuff(Buff buffNeed2Add)
+    {
+        buffNeed2Add.OnAdd();
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("SpeedUp"))
+        {
+            //....
+            AddBuff(new SpeedBuff(this, Buff.BuffKind.SpeedBuff, 10f));
+            //...
+        }
+    }
+}
+```
 * 上方用到的 __abstract__ 即修饰为抽象类型
     > 具体资料可查阅 [abstract C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract)
 * 通常情况下，继承用于表示基类和一个或多个派生类之间的“is a”关系，其中派生类是基类的特定版本；派生类是基类的具体类型。 例如，Publication 类表示任何类型的出版物，Book 和 Magazine 类表示出版物的具体类型。请注意，“is a”还表示类型与其特定实例化之间的关系。 在以下示例中，Automobile 类包含三个唯一只读属性：Make（汽车制造商）、Model（汽车型号）和 Year（汽车出厂年份）。 Automobile 类还有一个自变量被分配给属性值的构造函数，并将 Object.ToString 方法重写为生成唯一标识 Automobile 实例（而不是 Automobile 类）的字符串。基于继承的“is a”关系最适用于基类和向基类添加附加成员或需要基类没有的其他功能的派生类。
