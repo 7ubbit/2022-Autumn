@@ -323,8 +323,8 @@ public class ChangeSpeedBuff: MonoBehaviour {
 ///Buff继承结构
 ///<summary>
 public class Buff: MonoBehaviour { //定义一个Buff的基类继承于MonoBehaviour 使其能调用Unity的生命周期函数
-    public GameObject player; //定义Player对象
-    public float LastingTime ;
+    public GameObject player; //声明玩家对象
+    public float LastingTime ;//声明Buff持续时间
     public abstract void BuffEffect();//标记有 abstract 关键字的基类成员要求派生类必须重写它们。
     void Start()
     {
