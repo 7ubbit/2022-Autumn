@@ -318,67 +318,97 @@ public class ChangeSpeedBuff: MonoBehaviour {
 }
 ```
 * 可以看到代码里每一种Buff脚本都需要重复引用player,LastingTime等等，那么这些重复的功能(代码)，虽然复制粘贴很方便，但是这实在是太繁琐了(_不够优雅_)，并且代码过于重复，不利于后期维护查阅。于是我们便可以通过继承去优化结构，节省大量时间。
+* __这里要提醒大家，下面的内容可能过多的新关键词，不用着急，会慢慢更大家解释意思。__
 ``` C#
 ///<summary>
-///Buff继承结构
+///Buff基类 场景中不需要挂载
 ///<summary>
-public abstract class Buff
+public abstract class Buff //定义抽象基类Buff
 {
-    public enum BuffKind
+    public enum BuffKind //定义枚举类型 Buff种类
     {
-        HpBuff = 1,
-        SpeedBuff = 2,
+        HpBuff, //回血Buff
+        SpeedBuff,//加速Buff
     }
-    public float m_Length;//声明Buff持续时间
+    public float m_Length;//Buff持续时间
     public BuffKind m_BuffKind;//Buff的类型
     public Player m_Player;//作用的实体
-    public Buff(Player player, BuffKind buffKind, float length)//构造函数传参
+    public Buff(Player player, BuffKind buffKind, float length)//构造函数传参 
     {
-        m_Player = player;
-        m_Length = length;
-        m_BuffKind = buffKind;
+        m_Player = player; //第一个参数表示作用的实体 本例子中只有玩家 所以命名为Player 其实应该命名为实体
+        m_BuffKind = buffKind; //第二个参数表示作用Buff的种类
+        m_Length = length; //第三个表示该Buff持续的时间
     }
     public virtual void OnAdd() { }//添加Buff的虚函数
+    //public virtual void OnRemove(){} 可以自行思考如何写Buff移除功能
 }
-
+```
+* 关于 __abstract__ 即修饰为抽象类型
+    > 具体资料可查阅 [abstract C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract)
+* 关于 __enum__ 即枚举类
+    > 具体资料可查阅 [enum C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=net-7.0)
+* 关于构造函数 即在为新对象分配内存之后，new 运算符立即调用构造函数。
+    > 具体资料可查阅 [构造函数 C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/using-constructors)
+* 关于 __virtual__ 即被它修饰的成员，需要使它们可以在派生类中被重写
+    > 具体资料可查阅 [virtual C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/virtual)
+``` C#
+///<summary>
+///一种Buff类此处为加速Buff 场景中不需要挂载
+///<summary>
 public class SpeedBuff : Buff //继承于Buff类 而不是默认的 MonoBehaviour 类
 {
     public float DeltaSpeed = 10f; //增加的速度
-    public SpeedBuff(Player player, BuffKind buffKind, float length) : base(player, buffKind, length) { }
-    public override void OnAdd()
+    public SpeedBuff(Player player, BuffKind buffKind, float length) : base(player, buffKind, length) { } //构造函数传参
+    public override void OnAdd() //重写父类OnAdd()函数
     {
-        base.OnAdd();
-        m_Player.Speed += DeltaSpeed;
+        base.OnAdd(); 
+        m_Player.Speed += DeltaSpeed; //增加玩家对象的Speed
     }
 }
+```
+* 关于 __override__ 即扩展或修改
+    > 具体资料可查阅 [override C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/override)
+``` C#
 public class HpBuff: Buff //继承于Buff类 而不是默认的 MonoBehaviour 类
 {
-    
+    //思考HpBuff类该怎么写，可以参考上方的SpeedBuff，自己尝试写写并是否能在游戏中运行
 }
 ``` 
+* 现在Buff的管理已经完成了，可以看到Buff的基类包含了每个Buff都需要作用的
+    > 1.作用的对象Player-Player
+    > 2.作用的Buff种类-BuffKind
+    > 3.作用的时长-Length
+    > 4.添加Buff的方法-OnAdd()
+* 而不需要在每个Buff类中都写，避免了重复，在每个Buff类中现在只需要定义该Buff自身的一些效果，利用构造函数传递参数，重写一下添加Buff时调用的函数OnAdd()即可。
+* 那么现在该如何给玩家添加Buff呢？请看下方代码：
 ``` C#
 public class Player : MonoBehaviour
 {
     public float Speed; //移动速度
-    public float Hp;
-    //....刚体等省略
-    public void AddBuff(Buff buffNeed2Add)
+    public float Hp; //玩家血量
+    //....刚体，移动等省略
+    public void AddBuff(Buff buff) //定义一个添加Buff的内部函数 参数为Buff类型
     {
-        buffNeed2Add.OnAdd();
+        buff.OnAdd();
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("SpeedUp"))
+        if (other.gameObject.CompareTag("SpeedBuff")) //当碰到标签为 SpeedBuff 的触发对象
         {
             //....
             AddBuff(new SpeedBuff(this, Buff.BuffKind.SpeedBuff, 10f));
-            //...
+            ///<summary>
+            ///添加一个 SpeedBuff 作用
+            ///实体为Player(this指这里的Player) 
+            ///作用类型为Buff类里的枚举类型SpeedBuff 
+            ///Buff持续时间为10秒
+            ///<summary>
+            //....
         }
     }
 }
 ```
-* 上方用到的 __abstract__ 即修饰为抽象类型
-    > 具体资料可查阅 [abstract C#官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract)
+
 * 通常情况下，继承用于表示基类和一个或多个派生类之间的“is a”关系，其中派生类是基类的特定版本；派生类是基类的具体类型。 例如，Publication 类表示任何类型的出版物，Book 和 Magazine 类表示出版物的具体类型。请注意，“is a”还表示类型与其特定实例化之间的关系。 在以下示例中，Automobile 类包含三个唯一只读属性：Make（汽车制造商）、Model（汽车型号）和 Year（汽车出厂年份）。 Automobile 类还有一个自变量被分配给属性值的构造函数，并将 Object.ToString 方法重写为生成唯一标识 Automobile 实例（而不是 Automobile 类）的字符串。基于继承的“is a”关系最适用于基类和向基类添加附加成员或需要基类没有的其他功能的派生类。
 ### Unity项目架构设计与开发管理
 *重点介绍GameManager单例的使用以及后续复杂的Manager Of Managers，MVCS框架等*
@@ -391,3 +421,8 @@ public class Player : MonoBehaviour
 3. https://blog.csdn.net/qq_52855744/article/details/117755154
 4. https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract
 5. https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members
+6. https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=net-7.0
+7. https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/using-constructors
+8. https://blog.csdn.net/qq_15020543/article/details/87826009?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166337842816782427488714%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=166337842816782427488714&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-2-87826009-null-null.nonecase&utm_term=buff&spm=1018.2226.3001.4450
+9. https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/virtual
+10. https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/override
