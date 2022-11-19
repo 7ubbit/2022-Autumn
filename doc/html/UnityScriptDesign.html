@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Gamecore 2022</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;font-style:normal;font-weight:400;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:700;src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:italic;font-weight:400;src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:400;src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Script;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size1;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size2;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size3;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size4;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Typewriter;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype")}.katex{text-rendering:auto;font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0}.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}.katex .katex-version:after{content:"0.16.2"}.katex .katex-mathml{clip:rect(1px,1px,1px,1px);border:0;height:1px;overflow:hidden;padding:0;position:absolute;width:1px}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{max-width:0;width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{position:relative;width:0}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{border:0 solid;display:inline-block;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:block;height:inherit;position:absolute;width:100%}.katex svg path{stroke:none}.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{overflow:hidden;position:relative;width:100%}.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{border:.04em solid;box-sizing:border-box}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{padding-left:2em;text-align:left}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <!-- title: Gamecore 2022 -->
+<pre><code class="language-C#"><div><span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> Gamecore 2022</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> By 7ubbti and KevinChang</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> Originally Written in November 17, 2022</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+</div></code></pre>
+<h1 id="关于unity游戏开发中的脚本设计">关于Unity游戏开发中的脚本设计</h1>
+<h2 id="前言">前言</h2>
+<ul>
+<li>当你看到这篇教程的时候，相信你已经完成了第一次考核，并且成功做出了一款拥有自己创意的Roll-A-Ball游戏，作为你们的学长，我也是这么过来的，因为没有基础，一定很多地方都是似懂非懂的，于是便想写下了这篇教程，引导大家去思考，去进步，去学习。</li>
+<li>你们已经懂得了如何将C#脚本与游戏场景中的对象产生联系与交互(<em>通过将脚本挂载给游戏对象并拖拽引用</em>),那么不知大家在开发Roll-A-Ball时是否有遇到诸如此类的问题：
+<blockquote>
+<p>1.不同脚本中的 <strong>变量/参数/函数</strong> 之间无法互相 <strong>传递/调用</strong><br>
+2.假设有多个不同种类的拾取物时，需要重复写不同拾取物的功能代码<br>
+3.游戏场景中的对象(<em>玩家对象和拾取物对象</em>)无法用脚本统一的控制生成和销毁<br>
+4.Player脚本负责处理的功能太多以至于内容冗杂<br>
+.......</p>
+</blockquote>
+</li>
+<li><strong>我们常说软件开发就是算法+数据结构，而大家有没有思考过为何要研究算法和数据结构？</strong></li>
+<li>如果说初阶程序员写脚本只是为了实现功能，那么高阶程序员在写脚本时不仅仅只关注于脚本功能的实现，更重要的是 <strong>脚本(代码)的性能(<em>内存占用/运行效率</em>)以及代码的可维护性(<em>方便后期维护更新</em>)</strong> ，安全性等。</li>
+<li>也许大家会觉得 “<strong>刚开始就在意这么复杂的东西，只要实现功能就好</strong>” ，没错前提是你有成为游戏策划的想法，而作为程序员，论功能其实别的程序员也可以实现，那你如何脱颖而出呢？脚本设计的重要性不言而喻。</li>
+</ul>
+<h2 id="教程">教程</h2>
+<h3 id="关于unity中不同脚本间的交互">关于Unity中不同脚本间的交互</h3>
+<ul>
+<li>说到前言中的第一个问题，在Unity中不同脚本之间的交互有以下几种方法：</li>
+</ul>
+<h4 id="方法一">方法一:</h4>
+<ul>
+<li>通过在编辑器里面拖动，来持有这个对象去调用对应的函数，此方法比较简单。</li>
+<li>在编辑器中新建2个脚本。</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Ascript</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span> = <span class="hljs-number">1</span>; <span class="hljs-comment">//Ascript类内部变量</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomething</span>(<span class="hljs-params"></span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">&quot;Ascript doing!&quot;</span>); <span class="hljs-comment">//在Unity控制台中显示&quot;Ascript doing!&quot;</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>我们想用Main脚本去调用Ascript脚本。我们就在Main脚本中声明一个Ascript脚本的对象。</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> Ascript ascript;
+</div></code></pre>
+<ul>
+<li>这样在代码编写的时候已经可以调用A对象中的任何 <strong>public</strong> 变量和函数(公开出去的成员才能被外部类调用)。</li>
+<li>现在在Main脚本中有如下内容：</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> Ascript ascript;
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> Mvalue;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoASomething</span>(<span class="hljs-params"></span>)</span>
+    {   
+        <span class="hljs-comment">//ascript.DoSomething(); 此时若直接这样运行，将报错，因为此时ascript为空引用,程序并不知道是哪个脚本。</span>
+        <span class="hljs-keyword">if</span>(ascript != <span class="hljs-literal">null</span>) <span class="hljs-comment">//加上一个判断，使程序更安全，如果为空了，就不执行此代码。</span>
+        {
+            Mvalue = ascript.<span class="hljs-keyword">value</span>; <span class="hljs-comment">//Mvalue = 1;</span>
+            ascript.DoSomething(); <span class="hljs-comment">//输出 Ascript doing!</span>
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        DoASomething(); <span class="hljs-comment">//游戏开始时调用</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>现在我们要对它赋值,这个时候我们在编辑器拖一个有Ascript脚本的实体对象给Main脚本的ascript就可以了。</li>
+</ul>
+<h4 id="方法二">方法二：</h4>
+<ul>
+<li>直接使用SendMessage()方法,可在Unity API中查看此方法，此方法比较简单。</li>
+<li>我们把上面的直接调用改成</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> Ascript ascript;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoASomething</span>(<span class="hljs-params"></span>)</span>
+    {   
+        <span class="hljs-comment">//if(ascript != null) ascript.DoSomething();</span>
+        <span class="hljs-keyword">if</span>(ascript != <span class="hljs-literal">null</span>) ascript.SendMessage(<span class="hljs-string">&quot;DoSomething&quot;</span>); <span class="hljs-comment">//思考此方法的含义 输出：Ascript doing!</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        DoASomething(); <span class="hljs-comment">//游戏开始时调用</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>此时我们把Ascript脚本里面的DoSomething函数的public去掉:</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Ascript</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoSomething</span>(<span class="hljs-params"></span>) <span class="hljs-comment">//默认为private</span></span>
+    {
+        Debug.Log(<span class="hljs-string">&quot;Ascript doing!&quot;</span>); <span class="hljs-comment">//在Unity控制台中显示&quot;Ascript doing!&quot;</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>
+<p><strong>思考运行结果，或自己运行试试？</strong></p>
+</li>
+<li>
+<p>到这里，相信各位已经慢慢地对脚本之间的关系有了一定的理解了，那么现在补充一点，如何Ascript内容是这样的会发生什么？</p>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Ascript</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoSomething</span>(<span class="hljs-params"></span>) <span class="hljs-comment">//默认为private</span></span>
+    {
+        Debug.Log(<span class="hljs-string">&quot;Ascript doing!&quot;</span>); <span class="hljs-comment">//在Unity控制台中显示&quot;Ascript doing!&quot;</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoSomething</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span>
+    {
+        Debug.Log(<span class="hljs-built_in">string</span>.Format(<span class="hljs-string">&quot;{0} {1}&quot;</span>,<span class="hljs-string">&quot;Ascript doing&quot;</span>,<span class="hljs-keyword">value</span>));
+    }
+}
+</div></code></pre>
+<ul>
+<li>举这个例子只是想告诉大家，其实在开发实践中，很容易产生一些问题或者想法，大可一试，然后看看运行结果，你就会比别人多一点经验。</li>
+<li>这里也就不卖关子了 测试结果是谁在上面谁就会被调用(可以理解成按顺序)。</li>
+</ul>
+<h4 id="方法三">方法三：</h4>
+<ul>
+<li>现在我们将Ascript脚本的DoSomething()函数改成:</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Ascript</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span> = <span class="hljs-number">1</span>; <span class="hljs-comment">//Ascript类内部变量</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomething</span>(<span class="hljs-params"></span>) <span class="hljs-comment">//静态方法</span></span>
+    {
+        Debug.Log(<span class="hljs-string">&quot;Ascript doing!&quot;</span>); <span class="hljs-comment">//在Unity控制台中显示&quot;Ascript doing!&quot;</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>可以发现一个新的前缀 <strong>static</strong> 被放到了DoSomething()方法前</li>
+<li><strong>static</strong> 表示静态
+<blockquote>
+<p>关于静态类和静态类成员 可以查看C#官方文档中的介绍<a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members">静态类和静态类成员(C# 编程指南)</a></p>
+</blockquote>
+</li>
+<li>现在在Main脚本中我们就可以直接使用 <strong>Ascript.DoSomething();</strong> 调用：</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> Mvalue;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoASomething</span>(<span class="hljs-params"></span>)</span>
+    {   
+        <span class="hljs-comment">//Mvalue = Ascript.value; 调用Ascript的变量会报错，因为此变量不是静态变量</span>
+        Ascript.DoSomething(); <span class="hljs-comment">//直接调用静态方法 输出 Ascript doing!</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        DoASomething(); <span class="hljs-comment">//游戏开始时调用</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>此时你就会想如果想要Ascript.value也可以被Main调用，需要怎么样呢？</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span>; <span class="hljs-comment">//Ascript类内部静态变量</span>
+</div></code></pre>
+<ul>
+<li>答案显而易见，只需要将Ascript的value变量定义为静态变量即可使上方被注释的代码正常运行</li>
+<li>同理，如果想将整个Ascript内部的所有方法或者变量全都允许被其他类调用，可以直接定义此类为静态类</li>
+</ul>
+<h4 id="单例设计模式">单例设计模式</h4>
+<ul>
+<li><strong>现在让我们来探讨一些更有趣的方法</strong></li>
+<li>我们再在上面的基础上改成如下这个样子。</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Ascript</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Ascript aStatic;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span> 
+    {
+        aStatic = <span class="hljs-keyword">this</span>;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomething</span>(<span class="hljs-params"></span>)</span>
+    {
+        Debug.Log(<span class="hljs-string">&quot;Ascript doing!&quot;</span>);
+    }
+}
+</div></code></pre>
+<ul>
+<li>我们把Main脚本中的调用改成：<strong>Ascript.aStatic.DoSomething();</strong></li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> Mvalue;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoASomething</span>(<span class="hljs-params"></span>)</span>
+    {   
+        Ascript.aStatic.DoSomething(); <span class="hljs-comment">//输出 Ascript doing!</span>
+        Mvalue = Ascript.aStatic.<span class="hljs-keyword">value</span>; <span class="hljs-comment">// Mvalue = 1;</span>
+        <span class="hljs-comment">//Ascript.DoSomething(); 不再使用这种方式</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)</span>
+    {
+        DoASomething(); <span class="hljs-comment">//游戏开始时调用</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>
+<p><strong>注意：我们这个时候Main脚本已经不持有Ascript这个对象了。但是场景一定要这个对象，如果没有的话会报错。如果我们场景里面有很多这个对象，他会找到这个对象最早生成的那个，注意不是你创建的实体对象而是第一个拖上这个脚本的对象。</strong></p>
+</li>
+<li>
+<p>下面将此方法推广，使得即使不继承于MonoBehaviour的类也可以让其他脚本直接调用(即利用静态构造函数替代Start()方法),称此方法为单例设计模式</p>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> 
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton instance;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton Instance
+    {
+        <span class="hljs-keyword">get</span> {
+            <span class="hljs-keyword">if</span> (instance==<span class="hljs-literal">null</span>)
+            {
+                instance = <span class="hljs-keyword">new</span> Singleton();
+            }
+            <span class="hljs-keyword">return</span> instance;
+        }
+    }
+}
+<span class="hljs-comment">//在另一个类中使用 Singleton.Instance. 就可以调用Singleton内部的方法或者变量</span>
+</div></code></pre>
+<ul>
+<li>单例模式是软件工程学中最富盛名的设计模式之一，在开发过程中十分常见，所以我们经常会使用 <strong>泛型</strong> 写一个单例模式的基类，这样我们就可以通过继承该基类轻松实现单例模式，<strong>并且不会随着场景切换而销毁</strong>，代码如下所示：</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> 单例基类</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt; : <span class="hljs-title">MonoBehaviour</span> <span class="hljs-keyword">where</span> <span class="hljs-title">T</span> : <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt;
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> T Instance { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Awake</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (Instance == <span class="hljs-literal">null</span>)
+        {
+            Instance = (T) <span class="hljs-keyword">this</span>;
+            DontDestroyOnLoad(gameObject); <span class="hljs-comment">//该实例不会随场景切换而销毁</span>
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            Destroy(gameObject); <span class="hljs-comment">//消除重复实例</span>
+        }
+    }
+}
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> 游戏核心管理脚本</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> : <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">GameManager</span>&gt; <span class="hljs-comment">//继承于单例类的Manager</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> Value { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; } = <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">//在另一个类中使用 Manager.Instance. 就可以调用Manager内部的方法或者变量</span>
+</div></code></pre>
+<h4 id="方法总结">方法总结</h4>
+<ul>
+<li>
+<p>第一种利用脚本互相的挂载，试想想，如果你的交互总是建立在两个或多个脚本之间，我用你的脚本实例，你用他的脚本实例，他用不知道谁的脚本实例，最后越多就越乱，到最后你自己都不想维护了，该怎么行呢？所以第一种方式是非常不推荐大家使用的。</p>
+</li>
+<li>
+<p>第二种利用SendMessage()或者BroadcastMessage()方法，首先要注意的是此方法只能调用别的脚本的函数，并不能直接引用内部成员，其次需要介绍的是SendMessage和BroadcastMessage，是通过对对象自身底下的所有组件发送调用函数的方法，与类型无关，任意处调用，好用方便，但是问题比较明显，首先可能会通过其他组件上的名称调用某函数，抑或是根本不会采用这一方法。由于消息发送至全部组件中，因而用户无法对目标组件进行选取；其次该方法在内部依赖于反射机制，频繁使用会导致性能问题。但是如果只是个别几次，性能问题不大，而且也不需要使用静态，所以此方法可以使用，但如果频繁SendMessage就需要考虑下面的方法了。</p>
+</li>
+<li>
+<p>第三种利用static静态成员直接调用, <strong>但必须要清楚地是我们应该尽量避免使用静态变量</strong></p>
+<blockquote>
+<p>在Unity中，由于总是可以用各种方法找到一个对象，所以静态变量想不用，总是可以不用。比如你在根节点创建一个名为GameMode的GameObject，那么想用静态变量的地方，都可以改成非静态的扔到GameMode里面。访问的时候先找到唯一的那个GameObject对象再访问变量，用起来和静态变量区别不大。<br>
+再说关键的“对象生命周期”的问题，静态变量可以用类名直接访问，感觉写起来很方便，比如如果游戏客户端只有唯一一个玩家对象，类型为class Player，那么Player的血量就可以设计成直接用：Player.Hp 来访问。<br>
+这样写很多时候没问题，但是严格来说，<strong>必须注意</strong>：Player.Hp在什么时候开始可用，什么时候失效？由于Player对象肯定是在某个时刻创建，某个时刻销毁的（最晚是在游戏结束时销毁）。那么在Player创建之前、结束之后，Player.Hp是不可访问的，不应该被访问。这就是带来一个隐患：作为静态变量，Player.Hp可以随时访问，大不了读出来是0，但是原则上来讲，Player对象没有创建好的时候，Hp是不存在的。<br>
+游戏中的绝大部分物体都有这个问题，因为基本上，场景中所有对象都有着出生、死亡的时刻，包括各种管理器对象，用static静态变量，则它的语法与事实会存在出入。（因为static静态变量是绑定在类上，从逻辑上看，类比任何对象出现都早，结束都晚。哪怕一个对象都没有的时候，也已经有类了。）<br>
+这个问题在什么时候变得明显不对呢？就是不同类型的对象之间有相互依赖的时候。比如UI界面用到了任务管理器对象，Player用到了UI对象，任务管理器又在某些时候会访问Player的数据。这时候用静态变量很难理清哪个对象在什么时候能用、什么时候不能用。虽然这些对象大部分时候都不销毁，但未来项目变化的时候，东一个西一个的静态变量，就可能变成滋生BUG的温床。</p>
+</blockquote>
+</li>
+<li>
+<p>于是乎今天的主角就要登场了，使用 <strong>单例设计模式</strong>，单例有一个非常大的好处：它把以上讨论的，访问某种唯一对象的模式规范化了。规范化就意味着统一、好查。如果搞错了生命期，发现某个管理器找不到了，你就可以到创建、销毁的地方去查它，很容易就发现设计上的漏洞。当游戏中的某一个游戏对象永远只有一个实例的时候，那么就可以使用单例模式。</p>
+<blockquote>
+<p>由于单例模式在内存中只有一个实例，减少内存开支，特别是一个对象需要频繁地创建销毁时，而且创建或销毁时性能又无法优化,单例模式就非常明显了<br>
+由于单例模式只生成一个实例，所以，减少系统的性能开销，当一个对象产生需要比较多的资源时，如读取配置，产生其他依赖对象时，则可以通过在应用启动时直接产生一个单例对象，然后永久驻留内存的方式来解决。<br>
+单例模式可以避免对资源的多重占用，例如一个写文件操作，由于只有一个实例存在内存中，避免对同一个资源文件的同时写操作<br>
+单例模式可以在系统设置全局的访问点，优化和共享资源访问，例如，可以设计一个单例类，负责所有数据表的映射处理。</p>
+</blockquote>
+</li>
+<li>
+<p>当然单例也并不是完美的：</p>
+<blockquote>
+<p>单例模式一般没有接口，扩展很困难，若要扩展，除了修改代码基本上没有第二种途径可以实现。<br>
+单例对象如果持有Context，那么很容易引发内存泄漏，此时需要注意传递给单例对象的Context最好是Application Context。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>当然每种方法有每种方法使用的地方，不代表一成不变，所以要根据实际运用，选择合适的方法。</strong></p>
+</li>
+</ul>
+<h3 id="关于面向对象编程">关于面向对象编程</h3>
+<ul>
+<li>下面我们来到第二个问题，在Roll-A-Ball的开发中，大家一定都有这样的感受但凡遇到想加一个新Buff就要重新复制一边代码，简单来说就是代码的重复性太高，会很麻烦。所以下面就要跟大家介绍面向对象编程的核心。</li>
+<li>面向对象的三个特性:封装、继承、多态。对于封装(给予对象public/private/protected等修饰)，相信大家已经理解并掌握了，那么继承和多态呢？</li>
+</ul>
+<h4 id="什么是继承">什么是继承？</h4>
+<ul>
+<li>继承是面向对象程序设计中最重要的概念之一。</li>
+<li>借助继承，我们能够定义多个 <strong>可重用、扩展或修改父类行为</strong> 的子类。</li>
+<li>已有的一个类被称为基类(父类)，而新创建的并继承于该父类的一些类被称为派生类(子类)。</li>
+<li><strong>一个父类可以有多个子类，一个子类只能有一个父类，但一个子类可以通过接口的方式实现多重继承。</strong>
+<blockquote>
+<p>如果想了解接口，可以查阅<a href="https://learn.microsoft.com/zh-cn/dotnet/visual-basic/programming-guide/language-features/interfaces/">Interface C#官方文档</a></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="为什么要用继承">为什么要用继承？</h4>
+<ul>
+<li>继承允许我们根据一个类来定义另一个类，这使得创建和维护应用程序变得更容易。同时也有利于重用代码和节省开发时间。当创建一个类时，程序员不需要完全重新编写新的数据成员和成员函数，只需要设计一个新的类，继承了已有的类的成员即可。</li>
+</ul>
+<h4 id="继承如何在unity中体现">继承如何在Unity中体现？</h4>
+<ul>
+<li>接下来用大家已经做过的roll a ball举例说明，我们想设计小球吃方块获得相应buff，如果有多种方块，例如加Hp的方块、减Hp的方块、增加速度的方块等等，我们现在打算对每一种方块挂载一个脚本。分别命名为ChangeHpBuff,ChangeSpeedBuff...可能的实现如下：</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> Player脚本</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Player</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> Hp;
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> Speed;
+    <span class="hljs-comment">//.....等等玩家自身属性</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">move</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">//处理玩家移动的代码块</span>
+    }
+}
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> 加血Buff脚本</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ChangeHpBuff</span>: <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> GameObject player; <span class="hljs-comment">//声明玩家对象</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> LastingTime;<span class="hljs-comment">//声明Buff持续时间</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> DeltaHp;<span class="hljs-comment">//声明Buff增加血量</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BuffEffect</span>(<span class="hljs-params"></span>)<span class="hljs-comment">//该Buff的效果处理函数</span></span>
+    {
+        player.GetComponent&lt;Player&gt;().Hp+=DeltaHp; <span class="hljs-comment">//获取Player对象里的Player脚本组件 对其成员Hp进行增加</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnTriggerEnter</span>(<span class="hljs-params">Collision other</span>)</span>
+    {
+        <span class="hljs-keyword">if</span>(other.gameObject.CompareTag(<span class="hljs-string">&quot;Player&quot;</span>))
+        {
+            BuffEffect();
+            Destroy(gameObject);
+        }
+    }   
+    <span class="hljs-comment">//......</span>
+}
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> 加速Buff脚本</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ChangeSpeedBuff</span>: <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> GameObject player;<span class="hljs-comment">//声明玩家对象</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> LastingTime;<span class="hljs-comment">//声明Buff持续时间</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> DeltaSpeed;<span class="hljs-comment">//声明Buff增加速度</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BuffEffect</span>(<span class="hljs-params"></span>)<span class="hljs-comment">//该Buff的效果处理函数</span></span>
+    {
+        player.GetComponent&lt;Player&gt;().Speed+=DeltaSpeed;<span class="hljs-comment">//获取Player对象里的Player脚本组件 对其成员Speed进行增加</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnTriggerEnter</span>(<span class="hljs-params">Collision other</span>)</span>
+    {
+        <span class="hljs-keyword">if</span>(other.gameObject.CompareTag(<span class="hljs-string">&quot;Player&quot;</span>))
+        {
+            BuffEffect();
+            Destroy(gameObject);
+        }
+    }
+    <span class="hljs-comment">//......</span>
+}
+</div></code></pre>
+<ul>
+<li>可以看到代码里每一种Buff脚本都需要重复引用player,LastingTime等等，那么这些重复的功能(代码)，虽然复制粘贴很方便，但是这实在是太繁琐了(<em>不够优雅</em>)，并且代码过于重复，不利于后期维护查阅。于是我们便可以通过继承去优化结构，节省大量时间。</li>
+<li><strong>这里要提醒大家，下面的内容可能过多的新关键词，不用着急，会慢慢跟大家解释意思。</strong></li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span>Buff基类 场景中不需要挂载</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Buff</span> <span class="hljs-comment">//定义抽象基类Buff</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">enum</span> BuffKind <span class="hljs-comment">//定义枚举类型 Buff种类</span>
+    {
+        HpBuff, <span class="hljs-comment">//回血Buff</span>
+        SpeedBuff,<span class="hljs-comment">//加速Buff</span>
+    }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> m_Length;<span class="hljs-comment">//Buff持续时间</span>
+    <span class="hljs-keyword">public</span> BuffKind m_BuffKind;<span class="hljs-comment">//Buff的类型</span>
+    <span class="hljs-keyword">public</span> Player m_Player;<span class="hljs-comment">//作用的实体</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Buff</span>(<span class="hljs-params">Player player, BuffKind buffKind, <span class="hljs-built_in">float</span> length</span>)<span class="hljs-comment">//构造函数传参 </span></span>
+    {
+        m_Player = player; <span class="hljs-comment">//第一个参数表示作用的实体 本例子中只有玩家 所以命名为Player 其实应该命名为实体</span>
+        m_BuffKind = buffKind; <span class="hljs-comment">//第二个参数表示作用Buff的种类</span>
+        m_Length = length; <span class="hljs-comment">//第三个表示该Buff持续的时间</span>
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnAdd</span>(<span class="hljs-params"></span>)</span> { }<span class="hljs-comment">//添加Buff的虚函数</span>
+    <span class="hljs-comment">//public virtual void OnRemove(){} 可以自行思考如何写Buff移除功能</span>
+}
+</div></code></pre>
+<ul>
+<li>关于 <strong>abstract</strong> 即修饰为抽象类型
+<blockquote>
+<p>具体资料可查阅 <a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract">abstract C#官方文档</a></p>
+</blockquote>
+</li>
+<li>关于 <strong>enum</strong> 即枚举类
+<blockquote>
+<p>具体资料可查阅 <a href="https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=net-7.0">enum C#官方文档</a></p>
+</blockquote>
+</li>
+<li>关于构造函数 即在为新对象分配内存之后，new 运算符立即调用构造函数。
+<blockquote>
+<p>具体资料可查阅 <a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/using-constructors">构造函数 C#官方文档</a></p>
+</blockquote>
+</li>
+<li>关于 <strong>virtual</strong> 即被它修饰的成员，需要使它们可以在派生类中被重写
+<blockquote>
+<p>具体资料可查阅 <a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/virtual">virtual C#官方文档</a></p>
+</blockquote>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span>一种Buff类此处为加速Buff 场景中不需要挂载</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SpeedBuff</span> : <span class="hljs-title">Buff</span> <span class="hljs-comment">//继承于Buff类 而不是默认的 MonoBehaviour 类</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> DeltaSpeed = <span class="hljs-number">10f</span>; <span class="hljs-comment">//增加的速度</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SpeedBuff</span>(<span class="hljs-params">Player player, BuffKind buffKind, <span class="hljs-built_in">float</span> length</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">player, buffKind, length</span>)</span> { } <span class="hljs-comment">//构造函数传参</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnAdd</span>(<span class="hljs-params"></span>) <span class="hljs-comment">//重写父类OnAdd()函数</span></span>
+    {
+        <span class="hljs-keyword">base</span>.OnAdd(); 
+        m_Player.Speed += DeltaSpeed; <span class="hljs-comment">//增加玩家对象的Speed</span>
+    }
+}
+</div></code></pre>
+<ul>
+<li>关于 <strong>override</strong> 即扩展或修改
+<blockquote>
+<p>具体资料可查阅 <a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/override">override C#官方文档</a></p>
+</blockquote>
+</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HpBuff</span>: <span class="hljs-title">Buff</span> <span class="hljs-comment">//继承于Buff类 而不是默认的 MonoBehaviour 类</span>
+{
+    <span class="hljs-comment">//思考HpBuff类该怎么写，可以参考上方的SpeedBuff，自己尝试写写并是否能在游戏中运行</span>
+}
+</div></code></pre>
+<ul>
+<li>现在Buff的管理已经完成了，可以看到Buff的基类包含了每个Buff都需要作用的
+<blockquote>
+<p>1.作用的对象Player-Player<br>
+2.作用的Buff种类-BuffKind<br>
+3.作用的时长-Length<br>
+4.添加Buff的方法-OnAdd()</p>
+</blockquote>
+</li>
+<li>而不需要在每个Buff类中都写，避免了重复，在每个Buff类中现在只需要定义该Buff自身的一些效果，利用构造函数传递参数，重写一下添加Buff时调用的函数OnAdd()即可。</li>
+<li>那么现在该如何给玩家添加Buff呢？请看下方代码：</li>
+</ul>
+<pre><code class="language-C#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Player</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> Speed; <span class="hljs-comment">//移动速度</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">float</span> Hp; <span class="hljs-comment">//玩家血量</span>
+    <span class="hljs-comment">//....刚体，移动等省略</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddBuff</span>(<span class="hljs-params">Buff buff</span>) <span class="hljs-comment">//定义一个添加Buff的内部函数 参数为Buff类型</span></span>
+    {
+        buff.OnAdd();
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnTriggerEnter</span>(<span class="hljs-params">Collider other</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (other.gameObject.CompareTag(<span class="hljs-string">&quot;SpeedBuff&quot;</span>)) <span class="hljs-comment">//当碰到标签为 SpeedBuff 的触发对象</span>
+        {
+            <span class="hljs-comment">//....</span>
+            AddBuff(<span class="hljs-keyword">new</span> SpeedBuff(<span class="hljs-keyword">this</span>, Buff.BuffKind.SpeedBuff, <span class="hljs-number">10f</span>));
+            <span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span>        </span>
+            <span class="hljs-comment"><span class="hljs-doctag">///</span>添加一个 SpeedBuff 作用</span>
+            <span class="hljs-comment"><span class="hljs-doctag">///</span>实体为Player(this指这里的Player)      </span>
+            <span class="hljs-comment"><span class="hljs-doctag">///</span>作用类型为Buff类里的枚举类型SpeedBuff       </span>
+            <span class="hljs-comment"><span class="hljs-doctag">///</span>Buff持续时间为10秒       </span>
+            <span class="hljs-comment"><span class="hljs-doctag">///</span><span class="hljs-doctag">&lt;summary&gt;</span>        </span>
+            <span class="hljs-comment">//....</span>
+        }
+    }
+}
+</div></code></pre>
+<ul>
+<li>当然为了给大家一些<em>帮助</em>，可以看到Buff基类中定义了一个Buff持续时间，但是只有添加Buff(<em>OnAdd()</em>)的相关功能，并没有移除Buff(<em>OnRemove()</em>)的相关功能，就留给大家来做吧。</li>
+<li><strong>扩展问题：如果想要能显示玩家此时身上拥有哪些Buff，该如何实现此功能？</strong></li>
+<li>对传入的Buff持续时间进行处理当时间到时，执行Buff移除功能的函数，相信你可以做到的。</li>
+</ul>
+<h4 id="总结">总结</h4>
+<ul>
+<li>通常情况下，继承用于表示基类和一个或多个派生类之间的“is a”关系，其中派生类是基类的特定版本；派生类是基类的具体类型。 例如，Publication 类表示任何类型的出版物，Book 和 Magazine 类表示出版物的具体类型。请注意，“is a”还表示类型与其特定实例化之间的关系。 在以下示例中，Automobile 类包含三个唯一只读属性：Make（汽车制造商）、Model（汽车型号）和 Year（汽车出厂年份）。 Automobile 类还有一个自变量被分配给属性值的构造函数，并将 Object.ToString 方法重写为生成唯一标识 Automobile 实例（而不是 Automobile 类）的字符串。基于继承的“is a”关系最适用于基类和向基类添加附加成员或需要基类没有的其他功能的派生类。</li>
+</ul>
+<h3 id="unity项目架构设计与开发管理">Unity项目架构设计与开发管理</h3>
+<p><em>重点将介绍利用BuffManager管理Buff,并且推广至GameManager单例的使用以及后续复杂的Manager Of Managers，MVCS框架等</em></p>
+<h2 id="后记">后记</h2>
+<ul>
+<li>第一次写如此<em>庞大</em>的教程(还没有也永远难以写完)，相比难免会有些地方有出入，还请大家谅解，<strong>如果有发现或是说你有一些学习经验/想法都可以通过Github来提交你的更改至此文档</strong>。</li>
+<li>回想起一年前自己在默默一个人自学这些内容的时候，查阅了很多的博客、资料等，拼拼凑凑估摸出了一个大概的脚本设计方案，核心内容其实并没有理解多少(<em>其实今天也是如此</em>)，所以当我在尝试写这篇教程时，也是查阅了很多资料并且补充了很多知识，自己也算是很有收获吧。</li>
+<li>当然最主要的目的还是希望通过这篇教程，能帮助我的学弟们能更好、更快的深入理解到脚本设计。</li>
+<li>同伴看了我写的初稿后，说这篇文章要比CSDN上很多博客写得好得多(笑)，大概也算是投入了自己的一点心血和期望吧，希望刚来工作室的萌新们(学弟)能有一个好的开局，而不至于后面浪费太多自己的时间去走弯路。</li>
+<li>总之，也很感谢我的学长们，在我刚入工作室时，给予了我很大的帮助，所以也算是一种相传吧(笑)。</li>
+<li>最后，希望Gamecore工作室越来越好，Respect！</li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li><a href="https://www.zhihu.com/question/47537779/answer/702268198">https://www.zhihu.com/question/47537779/answer/702268198</a></li>
+<li><a href="https://blog.csdn.net/u011550097/article/details/87253629">https://blog.csdn.net/u011550097/article/details/87253629</a></li>
+<li><a href="http://raylei.cn/index.php/archives/16/#http://csharpindepth.com/Articles/General/Singleton.aspx">http://raylei.cn/index.php/archives/16/#http://csharpindepth.com/Articles/General/Singleton.aspx</a></li>
+<li><a href="https://blog.csdn.net/qq_52855744/article/details/117755154">https://blog.csdn.net/qq_52855744/article/details/117755154</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract">https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/abstract</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members">https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=net-7.0">https://learn.microsoft.com/zh-cn/dotnet/api/system.enum?view=net-7.0</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/using-constructors">https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/using-constructors</a></li>
+<li><a href="https://blog.csdn.net/qq_15020543/article/details/87826009?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166337842816782427488714%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=166337842816782427488714&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-2-87826009-null-null.nonecase&amp;utm_term=buff&amp;spm=1018.2226.3001.4450">https://blog.csdn.net/qq_15020543/article/details/87826009?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166337842816782427488714%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=166337842816782427488714&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-2-87826009-null-null.nonecase&amp;utm_term=buff&amp;spm=1018.2226.3001.4450</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/virtual">https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/virtual</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/override">https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/override</a></li>
+</ol>
+
+        
+        
+    </body>
+    </html>
