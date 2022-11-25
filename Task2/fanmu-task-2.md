@@ -1,24 +1,25 @@
+``` C#
 using UnityEngine;
-using System.Collections;//ÕâÁ½¸öÍ·ÎÄ¼şĞ´unity½Å±¾±Ø´ø
+using System.Collections;//è¿™ä¸¤ä¸ªå¤´æ–‡ä»¶å†™unityè„šæœ¬å¿…å¸¦
 
-public class ExampleBehaviourScript//ÎÄ¼şÃû : MonoBehaviour
+public class ExampleBehaviourScript//æ–‡ä»¶å : MonoBehaviour
 {
     
-    void Start()//³ÌĞò¿ªÊ¼Ê±Ö´ĞĞÒ»´Î
+    void Start()//ç¨‹åºå¼€å§‹æ—¶æ‰§è¡Œä¸€æ¬¡
     {
-        rb = GetComponent<Rigidbody>();//»ñµÃ¸ÕÌå
+        rb = GetComponent<Rigidbody>();//è·å¾—åˆšä½“
     }
     void Update()
     {
-         MoveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;// ¼àÌıÊó±êÊÂ¼şwasd
+         MoveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;// ç›‘å¬é¼ æ ‡äº‹ä»¶wasd
     }
     void FixedUpdate()
     {
-        rb.AddForce(MoveDir * moveSpeed);//ÊµÏÖÒÆ¶¯£¬AddForceÊÇÍÆÁ¦
+        rb.AddForce(MoveDir * moveSpeed);//å®ç°ç§»åŠ¨ï¼ŒAddForceæ˜¯æ¨åŠ›
     }
 }
 -----------------------------------------------------------------------------------------
-public class ForeachLoop : MonoBehaviour //foreachÑ­»·
+public class ForeachLoop : MonoBehaviour //foreachå¾ªç¯
 {   
     void Start () 
     {
@@ -28,7 +29,7 @@ public class ForeachLoop : MonoBehaviour //foreachÑ­»·
         strings[1] = "Second string";
         strings[2] = "Third string";
         
-        foreach(string item in strings)//Èô·ûºÏÌõ¼ş×Ô¶¯¼ÓÒ»
+        foreach(string item in strings)//è‹¥ç¬¦åˆæ¡ä»¶è‡ªåŠ¨åŠ ä¸€
         {
             print (item);
         }
@@ -37,14 +38,14 @@ public class ForeachLoop : MonoBehaviour //foreachÑ­»·
 -------------------------------------------------------------------------------------------
 public class Example:MonoBehaviour
 {
-    public int a;//¿ª·Å£¬¿ÉÒÔÔÚunityÄÚĞŞ¸Ä
-    private int b;//Ë½ÓĞ£¬ĞèÔÚ½Å±¾ÄÚĞŞ¸Ä
+    public int a;//å¼€æ”¾ï¼Œå¯ä»¥åœ¨unityå†…ä¿®æ”¹
+    private int b;//ç§æœ‰ï¼Œéœ€åœ¨è„šæœ¬å†…ä¿®æ”¹
     void Start()
     {
-        myOtherClass = new AnotherClass();//»ñµÃAnotherClassµÄÊµÀı
-        myOtherClass.FruitMachine(alpha, myOtherClass.apples);//¿ÉÒÔµ÷ÓÃAnotherClassÖĞ¿ª·ÅµÄFruitMachineº¯Êı
+        myOtherClass = new AnotherClass();//è·å¾—AnotherClassçš„å®ä¾‹
+        myOtherClass.FruitMachine(alpha, myOtherClass.apples);//å¯ä»¥è°ƒç”¨AnotherClassä¸­å¼€æ”¾çš„FruitMachineå‡½æ•°
     }
-}//Èç¹ûÆäËû½Å±¾ĞèÒªµ÷ÓÃ£¬¿ª·Å£¬·ñÔòË½ÓĞ
+}//å¦‚æœå…¶ä»–è„šæœ¬éœ€è¦è°ƒç”¨ï¼Œå¼€æ”¾ï¼Œå¦åˆ™ç§æœ‰
 public class AnotherClass
 {
     public int apples;
@@ -61,38 +62,38 @@ public class AnotherClass
 void Awake ()
     {
         Debug.Log("Awake called.");
-    }//½Å±¾Î´±»µ÷ÓÃÊ±Ò²¿ÉÒÔÔËĞĞ
+    }//è„šæœ¬æœªè¢«è°ƒç”¨æ—¶ä¹Ÿå¯ä»¥è¿è¡Œ
     
     
     void Start ()
     {
         Debug.Log("Start called.");
-    }//½Å±¾µ÷ÓÃÊ±ÔËĞĞ
-//Á½¸öÉúÃüÖÜÆÚÄÚÖ»µ÷ÓÃÒ»´Î
+    }//è„šæœ¬è°ƒç”¨æ—¶è¿è¡Œ
+//ä¸¤ä¸ªç”Ÿå‘½å‘¨æœŸå†…åªè°ƒç”¨ä¸€æ¬¡
 ---------------------------------------------------------
-    vector = player.transform.position - enemy.transform.position;//·½ÏòÏòÁ¿£¬ÓÉenemyÖ¸Ïòplayer
-//¸÷¸ö·ÖÁ¿·Ö±ğ³ıÒÔmagnitudeÄ£³¤¾ÍµÈÓÚµ¥Î»ÏòÁ¿
-    float a = player.transform.position.magnitude;//magnitude¿ÉÒÔ¼ÆËãplayerÏà¶ÔÓÚ£¨0,0,0£©µÄ¾àÀë
-     ¼ÆËã¹«Ê½: µ¥Î»³¤¶È£º£¨1,1,1£©
+    vector = player.transform.position - enemy.transform.position;//æ–¹å‘å‘é‡ï¼Œç”±enemyæŒ‡å‘player
+//å„ä¸ªåˆ†é‡åˆ†åˆ«é™¤ä»¥magnitudeæ¨¡é•¿å°±ç­‰äºå•ä½å‘é‡
+    float a = player.transform.position.magnitude;//magnitudeå¯ä»¥è®¡ç®—playerç›¸å¯¹äºï¼ˆ0,0,0ï¼‰çš„è·ç¦»
+     è®¡ç®—å…¬å¼: å•ä½é•¿åº¦ï¼šï¼ˆ1,1,1ï¼‰
      Vector v1= new Vector(2,2,3);
-     v1= new Vector(v1.x/v1.magnitude,v1.y/v1.magnitude,v1.z/v1.magnitude); //µ¥Î»»¯ÏòÁ¿Ö®ºó
+     v1= new Vector(v1.x/v1.magnitude,v1.y/v1.magnitude,v1.z/v1.magnitude); //å•ä½åŒ–å‘é‡ä¹‹å
 ------------------------------------------------------
-  µã³Ë£º
+  ç‚¹ä¹˜ï¼š
      Vector A(a,b,c)
      Vector B(x,y,z)
-     ABµÄµã»ı m=(a*x)+(b*y)+(c*z)=A*B
+     ABçš„ç‚¹ç§¯ m=(a*x)+(b*y)+(c*z)=A*B
 
-     µã³ËµÄ¼¸ºÎÒâÒå£º
-     µÃµ½BÔÚAÉÏÍ¶Ó°µÄ³¤¶È
+     ç‚¹ä¹˜çš„å‡ ä½•æ„ä¹‰ï¼š
+     å¾—åˆ°Båœ¨Aä¸ŠæŠ•å½±çš„é•¿åº¦
 
-     µã³ËµÄ´óÖÂ·½Î»£º
-     m>0:Èñ½Ç
-     m=0:Ö±½Ç
-     m<0:¶Û½Ç
+     ç‚¹ä¹˜çš„å¤§è‡´æ–¹ä½ï¼š
+     m>0:é”è§’
+     m=0:ç›´è§’
+     m<0:é’è§’
 
-     µã³ËÓÃÍ¾£º
-     ¿ÉÒÔÅĞ¶Ï¶ÔÏóµÄ·½Î»£»
-    ¿ÉÒÔ¼ÆËãÁ½¸öÏòÁ¿Ö®¼äµÄ¼Ğ½Ç;
+     ç‚¹ä¹˜ç”¨é€”ï¼š
+     å¯ä»¥åˆ¤æ–­å¯¹è±¡çš„æ–¹ä½ï¼›
+    å¯ä»¥è®¡ç®—ä¸¤ä¸ªå‘é‡ä¹‹é—´çš„å¤¹è§’;
 --------------------------------------------
 public class EnableComponents : MonoBehaviour
 {
@@ -101,40 +102,30 @@ public class EnableComponents : MonoBehaviour
     
     void Start ()
     {
-        myLight = GetComponent<Light>();//ÆôÓÃ×é¼ş
+        myLight = GetComponent<Light>();//å¯ç”¨ç»„ä»¶
     }
 }
 ----------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-unityÉúÃüÖÜÆÚËµÃ÷
+unityç”Ÿå‘½å‘¨æœŸè¯´æ˜
 public class ExampleBehaviourScript : MonoBehaviour
 {
-    void Awake()//ÔÚÈÎºÎstartº¯ÊıÖ®Ç°Ö´ĞĞ
+    void Awake()//åœ¨ä»»ä½•startå‡½æ•°ä¹‹å‰æ‰§è¡Œ
     {
 
     }
-     private void OnEnable()//ÆôÓÃ¶ÔÏóºóÁ¢¼´µ÷ÓÃ£¬¿ÉÓÃÓÚ¼ÓÔØ¹Ø¿¨»òÓĞ½Å±¾µÄÓÎÏ·¶ÔÏó
-    {
-        
-    }
-    private void OnLevelWasLoaded(int level)//¿É¸æÖªÓÎÏ·ÒÑ¼ÓÔØĞÂ¹Ø¿¨
+     private void OnEnable()//å¯ç”¨å¯¹è±¡åç«‹å³è°ƒç”¨ï¼Œå¯ç”¨äºåŠ è½½å…³å¡æˆ–æœ‰è„šæœ¬çš„æ¸¸æˆå¯¹è±¡
     {
         
     }
+    private void OnLevelWasLoaded(int level)//å¯å‘ŠçŸ¥æ¸¸æˆå·²åŠ è½½æ–°å…³å¡
+    {
+        
+    }
 
 
-    void OnApplicationPause()//Ö¡µÄ½áÎ²µ÷ÓÃ
+    void OnApplicationPause()//å¸§çš„ç»“å°¾è°ƒç”¨
     {
 
     }
@@ -142,59 +133,59 @@ public class ExampleBehaviourScript : MonoBehaviour
 
 
 
-    void Update()//Ã¿Ö¡µ÷ÓÃÒ»´Î£¬ÊÜµçÄÔÖ¡ÊıÓ°Ïì£¬·ÅĞèÒªÊµÊ±µ÷ÓÃµÄº¯Êı£¬·Å¶àÁË»á¿¨¶Ù
+    void Update()//æ¯å¸§è°ƒç”¨ä¸€æ¬¡ï¼Œå—ç”µè„‘å¸§æ•°å½±å“ï¼Œæ”¾éœ€è¦å®æ—¶è°ƒç”¨çš„å‡½æ•°ï¼Œæ”¾å¤šäº†ä¼šå¡é¡¿
     {
 
     }
-    void FixedUpdate()//Ò»Ãëµ÷ÓÃÎåÊ®´Î£¬´ÎÊıÎÈ¶¨
+    void FixedUpdate()//ä¸€ç§’è°ƒç”¨äº”åæ¬¡ï¼Œæ¬¡æ•°ç¨³å®š
     {
 
     }
-    void LateUpdate()//Ã¿Ö¡µ÷ÓÃÒ»´Î£¬ÔÚUpdateÖ®ºó£¬Í¨³£ÓÃÓÚµÚÈıÈË³Æ¸úËæÏà»ú
+    void LateUpdate()//æ¯å¸§è°ƒç”¨ä¸€æ¬¡ï¼Œåœ¨Updateä¹‹åï¼Œé€šå¸¸ç”¨äºç¬¬ä¸‰äººç§°è·Ÿéšç›¸æœº
     {
 
     }
 }
 -------------------------------------------
-µ÷ÓÃÆäËû½Å±¾º¯ÊıµÄ·½·¨£º
+è°ƒç”¨å…¶ä»–è„šæœ¬å‡½æ•°çš„æ–¹æ³•ï¼š
 1.
-//A½Å±¾
+//Aè„šæœ¬
 public class Ascript : MonoBehaviour 
 {
-    public int value = 1; //AscriptÀàÄÚ²¿±äÁ¿
+    public int value = 1; //Ascriptç±»å†…éƒ¨å˜é‡
     public void DoSomething()
     {
-        Debug.Log("Ascript doing!"); //ÔÚUnity¿ØÖÆÌ¨ÖĞÏÔÊ¾"Ascript doing!"
+        Debug.Log("Ascript doing!"); //åœ¨Unityæ§åˆ¶å°ä¸­æ˜¾ç¤º"Ascript doing!"
     }
 }
-//B½Å±¾
+//Bè„šæœ¬
 public class Main : MonoBehaviour 
 {
-    public Ascript ascript;//Òªµ÷ÓÃA½Å±¾£¬±ØĞëÏÈ¶¨Òå
+    public Ascript ascript;//è¦è°ƒç”¨Aè„šæœ¬ï¼Œå¿…é¡»å…ˆå®šä¹‰
     private int Mvalue;
     public void DoASomething()
     {   
         
-        if(ascript != null) //¼ÓÉÏÒ»¸öÅĞ¶Ï£¬Ê¹³ÌĞò¸ü°²È«£¬Èç¹ûÎª¿ÕÁË£¬¾Í²»Ö´ĞĞ´Ë´úÂë¡£
+        if(ascript != null) //åŠ ä¸Šä¸€ä¸ªåˆ¤æ–­ï¼Œä½¿ç¨‹åºæ›´å®‰å…¨ï¼Œå¦‚æœä¸ºç©ºäº†ï¼Œå°±ä¸æ‰§è¡Œæ­¤ä»£ç ã€‚
         {
             Mvalue = ascript.value; //Mvalue = 1;
-            ascript.DoSomething(); //Êä³ö Ascript doing!
+            ascript.DoSomething(); //è¾“å‡º Ascript doing!
         }
     }
     void Start()
     {
-        DoASomething(); //ÓÎÏ·¿ªÊ¼Ê±µ÷ÓÃ
+        DoASomething(); //æ¸¸æˆå¼€å§‹æ—¶è°ƒç”¨
     }
 }
-´´½¨Ò»¸ö¿Õ¶ÔÏó£¬¹ÒÔØA½Å±¾£¬ÔÙ½«¸Ã¿Õ¶ÔÏóÍÏÖÁB½Å±¾µÄascriptÖĞ
-·¨2£º
+åˆ›å»ºä¸€ä¸ªç©ºå¯¹è±¡ï¼ŒæŒ‚è½½Aè„šæœ¬ï¼Œå†å°†è¯¥ç©ºå¯¹è±¡æ‹–è‡³Bè„šæœ¬çš„ascriptä¸­
+æ³•2ï¼š
 public class Main : MonoBehaviour 
 {
     public Ascript ascript;
     public void DoASomething()
     {   
        
-        if(ascript != null) ascript.SendMessage("DoSomething");//AscriptÖĞµÄDoSomething¿É¿ª·Å¿ÉË½ÓĞ
+        if(ascript != null) ascript.SendMessage("DoSomething");//Ascriptä¸­çš„DoSomethingå¯å¼€æ”¾å¯ç§æœ‰
     }
     void Start()
     {
@@ -203,7 +194,7 @@ public class Main : MonoBehaviour
 }
 
 ---------------------------------------------------
-µ¥Àı
+å•ä¾‹
 public class Ascript : MonoBehaviour
 {
     public static Ascript aStatic;
@@ -221,7 +212,7 @@ public class Main : MonoBehaviour {
     private int Mvalue;
     public void DoASomething()
     {   
-        Ascript.aStatic.DoSomething();//µ÷ÓÃ
+        Ascript.aStatic.DoSomething();//è°ƒç”¨
         Mvalue = Ascript.aStatic.value; // Mvalue = 1;
     }
     void Start()
@@ -229,9 +220,9 @@ public class Main : MonoBehaviour {
         DoASomething();
     }
 }
-À©Õ¹£ºµ¥ÀıÉè¼ÆÄ£Ê½
-Ê¹µÃ¼´Ê¹²»¼Ì³ĞÓÚMonoBehaviourµÄÀàÒ²¿ÉÒÔÈÃÆäËû½Å±¾Ö±½Óµ÷ÓÃ
-ÀûÓÃ¾²Ì¬¹¹Ôìº¯ÊıÌæ´úStart()·½·¨
+æ‰©å±•ï¼šå•ä¾‹è®¾è®¡æ¨¡å¼
+ä½¿å¾—å³ä½¿ä¸ç»§æ‰¿äºMonoBehaviourçš„ç±»ä¹Ÿå¯ä»¥è®©å…¶ä»–è„šæœ¬ç›´æ¥è°ƒç”¨
+åˆ©ç”¨é™æ€æ„é€ å‡½æ•°æ›¿ä»£Start()æ–¹æ³•
 public class Singleton 
 {
     public static Singleton instance;
@@ -246,60 +237,58 @@ public class Singleton
         }
     }
 }
-//ÔÚÁíÒ»¸öÀàÖĞÊ¹ÓÃ Singleton.Instance. ¾Í¿ÉÒÔµ÷ÓÃSingletonÄÚ²¿µÄ·½·¨»òÕß±äÁ¿
+//åœ¨å¦ä¸€ä¸ªç±»ä¸­ä½¿ç”¨ Singleton.Instance. å°±å¯ä»¥è°ƒç”¨Singletonå†…éƒ¨çš„æ–¹æ³•æˆ–è€…å˜é‡
 
 
 
-public class Singleton<T> : MonoBehaviour where T : Singleton<T>//ÏŞÖÆ·¶Àà
+public class Singleton<T> : MonoBehaviour where T : Singleton<T>//é™åˆ¶èŒƒç±»
 {
     public static T Instance { get; private set; }
     protected void Awake()
     {
         if (Instance == null)
         {
-            Instance = (T) this;//µ÷ÓÃ×ÔÉí
-            DontDestroyOnLoad(gameObject); //¸ÃÊµÀı²»»áËæ³¡¾°ÇĞ»»¶øÏú»Ù
+            Instance = (T) this;//è°ƒç”¨è‡ªèº«
+            DontDestroyOnLoad(gameObject); //è¯¥å®ä¾‹ä¸ä¼šéšåœºæ™¯åˆ‡æ¢è€Œé”€æ¯
         }
         else
         {
-            Destroy(gameObject); //Ïû³ıÖØ¸´ÊµÀı
+            Destroy(gameObject); //æ¶ˆé™¤é‡å¤å®ä¾‹
         }
     }
 }
 ///<summary>
-/// ÓÎÏ·ºËĞÄ¹ÜÀí½Å±¾
+/// æ¸¸æˆæ ¸å¿ƒç®¡ç†è„šæœ¬
 ///<summary>
-public class Manager : Singleton<GameManager> //¼Ì³ĞÓÚµ¥ÀıÀàµÄManager
+public class Manager : Singleton<GameManager> //ç»§æ‰¿äºå•ä¾‹ç±»çš„Manager
 {
     public int Value { get; set; } = 0;
 }
-//ÔÚÁíÒ»¸öÀàÖĞÊ¹ÓÃ Manager.Instance. ¾Í¿ÉÒÔµ÷ÓÃManagerÄÚ²¿µÄ·½·¨»òÕß±äÁ¿
-//µ¥ÀıÔÚ³¡¾°ÖĞÖ»ÄÜÊµÀıÒ»¸ö£¬µ¥Àı³£¼ûÓÃÔÚgamemanager»òmenumanagerÖĞ£¬¸ÃÀàÔÚ³¡¾°ÖĞÖ»´æÔÚÒ»¸ö
+//åœ¨å¦ä¸€ä¸ªç±»ä¸­ä½¿ç”¨ Manager.Instance. å°±å¯ä»¥è°ƒç”¨Managerå†…éƒ¨çš„æ–¹æ³•æˆ–è€…å˜é‡
+//å•ä¾‹åœ¨åœºæ™¯ä¸­åªèƒ½å®ä¾‹ä¸€ä¸ªï¼Œå•ä¾‹å¸¸è§ç”¨åœ¨gamemanageræˆ–menumanagerä¸­ï¼Œè¯¥ç±»åœ¨åœºæ™¯ä¸­åªå­˜åœ¨ä¸€ä¸ª
 -----------------------------------------------------------
 
-
-
-¼Ì³Ğ
-public abstract class Buff //¶¨Òå³éÏó»ùÀàBuff
+ç»§æ‰¿
+public abstract class Buff //å®šä¹‰æŠ½è±¡åŸºç±»Buff
 {
-    public enum BuffKind //¶¨ÒåÃ¶¾ÙÀàĞÍ BuffÖÖÀà
+    public enum BuffKind //å®šä¹‰æšä¸¾ç±»å‹ Buffç§ç±»
     {
-        HpBuff, //»ØÑªBuff
-        SpeedBuff,//¼ÓËÙBuff
+        HpBuff, //å›è¡€Buff
+        SpeedBuff,//åŠ é€ŸBuff
     }
-    public float m_Length;//Buff³ÖĞøÊ±¼ä
-    public BuffKind m_BuffKind;//BuffµÄÀàĞÍ
-    public Player m_Player;//×÷ÓÃµÄÊµÌå
-    public Buff(Player player, BuffKind buffKind, float length)//¹¹Ôìº¯Êı´«²Î 
+    public float m_Length;//BuffæŒç»­æ—¶é—´
+    public BuffKind m_BuffKind;//Buffçš„ç±»å‹
+    public Player m_Player;//ä½œç”¨çš„å®ä½“
+    public Buff(Player player, BuffKind buffKind, float length)//æ„é€ å‡½æ•°ä¼ å‚ 
     {
-        m_Player = player; //µÚÒ»¸ö²ÎÊı±íÊ¾×÷ÓÃµÄÊµÌå ±¾Àı×ÓÖĞÖ»ÓĞÍæ¼Ò ËùÒÔÃüÃûÎªPlayer ÆäÊµÓ¦¸ÃÃüÃûÎªÊµÌå
-        m_BuffKind = buffKind; //µÚ¶ş¸ö²ÎÊı±íÊ¾×÷ÓÃBuffµÄÖÖÀà
-        m_Length = length; //µÚÈı¸ö±íÊ¾¸ÃBuff³ÖĞøµÄÊ±¼ä
+        m_Player = player; //ç¬¬ä¸€ä¸ªå‚æ•°è¡¨ç¤ºä½œç”¨çš„å®ä½“ æœ¬ä¾‹å­ä¸­åªæœ‰ç©å®¶ æ‰€ä»¥å‘½åä¸ºPlayer å…¶å®åº”è¯¥å‘½åä¸ºå®ä½“
+        m_BuffKind = buffKind; //ç¬¬äºŒä¸ªå‚æ•°è¡¨ç¤ºä½œç”¨Buffçš„ç§ç±»
+        m_Length = length; //ç¬¬ä¸‰ä¸ªè¡¨ç¤ºè¯¥BuffæŒç»­çš„æ—¶é—´
     }
-    public virtual void OnAdd() { }//Ìí¼ÓBuffµÄĞéº¯Êı
+    public virtual void OnAdd() { }//æ·»åŠ Buffçš„è™šå‡½æ•°
 }
 --------------------------------------------------
-
+```
 
 
 
