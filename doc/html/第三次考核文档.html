@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Gamecore 2022&#x79cb;&#x5b63;&#x8003;&#x6838;</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <!-- title: Gamecore 2022秋季考核 --> 
+<h1 id="第三次考核1127学期末">第三次考核（11.27——学期末）</h1>
+<h2 id="基础知识学习">基础知识学习</h2>
+<ul>
+<li>了解数据结构：栈和队列的基本概念</li>
+<li>了解C++容器的基本概念，了解stack，queue和vector的基本知识和底层实现</li>
+</ul>
+<h2 id="主要任务">主要任务</h2>
+<ul>
+<li>1.跟着教程学习，参考教程制作一款3D坦克大战游戏，要求如下(教程资料在下方)：
+<ul>
+<li>基本玩法参考坦克大战，需要完成的功能如下(<strong>必须完成基础功能,完成一些进阶功能,最好能加入个人创新功能</strong>)：
+<table>
+<thead>
+<tr>
+<th style="text-align:center">基础功能</th>
+<th style="text-align:center">进阶功能</th>
+<th style="text-align:center">创新功能(<em>可能的方向</em>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">场景搭建</td>
+<td style="text-align:center">多回合制</td>
+<td style="text-align:center">敌人AI？</td>
+</tr>
+<tr>
+<td style="text-align:center">制作预制体坦克</td>
+<td style="text-align:center">优秀UI设计</td>
+<td style="text-align:center">多种攻击方式？</td>
+</tr>
+<tr>
+<td style="text-align:center">本地双人对战PVP</td>
+<td style="text-align:center">加入特效</td>
+<td style="text-align:center">多种炮弹？</td>
+</tr>
+<tr>
+<td style="text-align:center">基础发射炮弹</td>
+<td style="text-align:center">蓄力发射</td>
+<td style="text-align:center">玩家自定义颜色、按键等？</td>
+</tr>
+<tr>
+<td style="text-align:center">基础UI显示</td>
+<td style="text-align:center">高光特写</td>
+<td style="text-align:center">小地图？</td>
+</tr>
+<tr>
+<td style="text-align:center">加入音效</td>
+<td style="text-align:center">场景可拾取道具</td>
+<td style="text-align:center">多种不同道具(Buff)？</td>
+</tr>
+<tr>
+<td style="text-align:center">相机跟随</td>
+<td style="text-align:center">攻击模式可变</td>
+<td style="text-align:center">多人在线模式？</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><strong>根据自己在Task2中填写的自己最喜欢的游戏或者游戏类型，选择一个来自这类游戏的要素，融入坦克大战游戏中</strong></li>
+<li>选择性使用官方给的素材，此次最终评审标准看重玩法实现，额外的素材可以使用，也可以不用
+<blockquote>
+<p>素材放在<a href="https://github.com/7ubbti/2022-Autumn/tree/main/Task3">2022-Autumn/Task3/Tank Fight Tutorial</a>，复制此文件夹至别处，使用Unity打开(<em>记得更新版本</em>)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>3.自己建立工程项目的git仓库，将本地工程文件保存到自己的Github仓库
+<ul>
+<li>可使用.gitignore管理Unity的工程文件仓库（<em>自行了解</em>）</li>
+</ul>
+</li>
+<li>4.完成后创建一份名为 <strong><a href="http://xn---task-03-bf1n157b.html">姓名-task-03.md</a></strong> 的Markdown文档，内容如下:
+<blockquote>
+<p>包含本次作品的介绍并附上自己坦克大战工程文件的仓库链接(<strong>只需要工程文件,游戏可执行文件按上方要求提交</strong>)<br>
+一些个人的学习笔记和经验</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="任务提交">任务提交</h2>
+<ul>
+<li>1.将坦克大战的 <strong>可运行游戏文件</strong> 与上方任务4的 <strong><a href="http://xn---task-03-bf1n157b.html">姓名-task-03.md</a></strong> 放入一个以自己姓名命名的文件夹中</li>
+<li>2.将此文件夹提交至个人仓库中的 <strong>Task3</strong> 文件夹中,路径为：2022-Autumn/Task3/</li>
+<li>3.向<a href="https://github.com/7ubbti/2022-Autumn">考核仓库</a>发起Pull Request(<em>合并请求</em>)。</li>
+</ul>
+<h2 id="评分标准">评分标准</h2>
+<ul>
+<li>本次将会设置奖项，评分要求如下(总分100)：
+<table>
+<thead>
+<tr>
+<th style="text-align:center">评分点</th>
+<th style="text-align:center">占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">功能实现</td>
+<td style="text-align:center">20%</td>
+</tr>
+<tr>
+<td style="text-align:center">玩法&amp;创意</td>
+<td style="text-align:center">30%</td>
+</tr>
+<tr>
+<td style="text-align:center">技术表现</td>
+<td style="text-align:center">30%</td>
+</tr>
+<tr>
+<td style="text-align:center">游戏表现</td>
+<td style="text-align:center">10%</td>
+</tr>
+<tr>
+<td style="text-align:center">玩家投票</td>
+<td style="text-align:center">10%</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>加分项:个人创意&amp;要素&amp;创新功能</li>
+<li>技术表现即 <strong>代码难度</strong> <strong>复杂度</strong> <strong>维护性</strong> <strong>简洁性</strong> 等</li>
+<li>游戏表现即 <strong>音效</strong> <strong>特效</strong> <strong>渲染</strong> <strong>场景搭建</strong> 等</li>
+</ul>
+<h2 id="奖项安排">奖项安排</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">奖项</th>
+<th style="text-align:center">数量</th>
+<th style="text-align:center">奖品</th>
+<th style="text-align:center">要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">完美作品</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">任选1款+50元+13款Steam独立游戏提前畅玩</td>
+<td style="text-align:center">第一名评分达到95分以上</td>
+</tr>
+<tr>
+<td style="text-align:center">最佳作品</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">40元+13款Steam独立游戏提前畅玩</td>
+<td style="text-align:center">评分第一名</td>
+</tr>
+<tr>
+<td style="text-align:center">优秀作品</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">30元</td>
+<td style="text-align:center">评分第二、三名</td>
+</tr>
+<tr>
+<td style="text-align:center">值得鼓励作品</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">25元</td>
+<td style="text-align:center">某一项得分尤其突出</td>
+</tr>
+<tr>
+<td style="text-align:center">人气作品</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">25元</td>
+<td style="text-align:center">获投票数最高</td>
+</tr>
+<tr>
+<td style="text-align:center">参与作品</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">提供作品指导，帮助改进</td>
+<td style="text-align:center">提交作品</td>
+</tr>
+</tbody>
+</table>
+<h3 id="解释">解释：</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">可畅玩独立游戏</th>
+<th style="text-align:center">可畅玩独立游戏</th>
+<th style="text-align:center">可畅玩独立游戏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">哥布林弹球 Peglin</td>
+<td style="text-align:center">碳酸危机</td>
+<td style="text-align:center">Half-Life:Alyx</td>
+</tr>
+<tr>
+<td style="text-align:center">怪兽远征</td>
+<td style="text-align:center">APE OUT</td>
+<td style="text-align:center">Mark of the Ninja: Remastered</td>
+</tr>
+<tr>
+<td style="text-align:center">黎明前20分钟</td>
+<td style="text-align:center">Baba is You</td>
+<td style="text-align:center">Mortal Kombat 11</td>
+</tr>
+<tr>
+<td style="text-align:center">Noita</td>
+<td style="text-align:center">Outer Wilds</td>
+<td style="text-align:center">Supraland</td>
+</tr>
+<tr>
+<td style="text-align:center">Tilt Brush</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>畅玩作品，免费使用工作室的Steam账号，家庭库共享畅玩，后续成为工作室正式成员也可以使用</li>
+<li>任选优秀独立游戏，将购入工作室Steam账号</li>
+<li>所有奖项的设立，只是为了鼓励大家的创作积极性，考核的本质并不是比赛。</li>
+<li>完美作品和最佳作品不可重复领取(<em>即若第一名达到90分以上，获得完美作品，若不达到90分，获得最佳作品</em>)</li>
+<li>所有奖项均不可重复领取，每个人只能选择领取一个奖项</li>
+<li><strong>本次考核最终解释权归Gamecore所有</strong></li>
+</ul>
+<h2 id="考核演示">考核演示</h2>
+<ul>
+<li>本次考核结束后（暂定于元旦假期）会有一次考核演示和例会，需要大家在会上展示自己的作品。</li>
+<li>考核作品统一上传游戏文件至群文件中《第三次考核作品》文件夹供大家游玩和参考。</li>
+</ul>
+<h2 id="坦克大战教程及资源">坦克大战教程及资源</h2>
+<ul>
+<li><a href="https://assetstore.unity.com/packages/essentials/tutorial-projects/tanks-tutorial-46209">Unity官方商店资源</a></li>
+<li><a href="https://github.com/7ubbti/2022-Autumn/tree/main/Task3">2022-Autumn/Task3/Tank Fight Tutorial</a></li>
+<li><a href="https://www.bilibili.com/video/BV1bf4y167Nd/?share_source=copy_web&amp;vd_source=cc26c2405cb1c8fb0a4f28c62b7e1e96">Bilibili Unity坦克大战 视频教程</a></li>
+<li><a href="https://www.bilibili.com/video/BV1ua4y1L7oY/?share_source=copy_web&amp;vd_source=cc26c2405cb1c8fb0a4f28c62b7e1e96">【超详细Unity3D官方案例【沙漠坦克大战】游戏完整教程~初中级学习者</a></li>
+</ul>
+
+        
+        
+    </body>
+    </html>
